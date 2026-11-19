@@ -20,7 +20,6 @@ rồi mới chạy đánh giá. Khối 1 không sửa code.
 
 ### Câu 1.1 · Một mục tiêu cấp hệ thống (khác "model trả lời đúng")
 
-> **DRAFT — chưa được nhóm phê duyệt:** Trợ lý giúp LogiX xử lý yêu cầu hoàn tiền do giao hàng trễ theo chính sách có hiệu lực, tạo kết quả có thể đối soát cho khách hàng, hãng vận chuyển và shop, đồng thời chuyển các trường hợp cần phê duyệt cho con người trong giới hạn vận hành của pilot. Cần đối chiếu với PRD v1.1 §3 khi nhóm cung cấp.
 > Giảm tổng chi phí xử lý mỗi yêu cầu hoàn tiền giao trễ xuống dưới mức làm tay (10.000đ/ticket) và giữ số tiền hoàn sai = 0, để Gate 1 có đủ căn cứ quyết định chạy pilot ở 2 depot hay không.
 
 ### Câu 1.2 · Mục tiêu nhìn từ hai người
@@ -84,8 +83,6 @@ Giải thích một câu: Chênh lệch 1 lần chạy (49/50 so với 50/50) n�
 
 ### Câu 1.6 · Bản tiêu chí
 
-**DRAFT — các ngưỡng, hành động và quy tắc dưới đây chưa được nhóm phê duyệt, chưa được ký; cần đối chiếu PRD v1.1 và eval card Lab 9 trước khi chốt.** Các câu áp dụng cho từng report của bộ thử dùng để quyết định; nhóm cần xác nhận bộ thử và phạm vi trước khi ký.
-
 **Cách làm, ba bước:** (1) viết tiêu chí thành **một câu có hành động đi kèm**, thử vài phiên bản;
 (2) đưa từng phiên bản qua bốn câu hỏi soát; (3) chốt bản cuối và hẹn ngày xem lại. Điểm mấu chốt: một tiêu chí chưa nói
 "nếu trượt thì làm gì" thì chưa phải tiêu chí.
@@ -97,12 +94,6 @@ Giải thích một câu: Chênh lệch 1 lần chạy (49/50 so với 50/50) n�
 
 | Chỉ số (khoá trong `acceptance_criteria.json`) | Phiên bản 1 | Phiên bản 2 (nếu có) |
 |---|---|---|
-| `pass_rate_min` | DRAFT: Nếu tỷ lệ lượt chạy đạt dưới 98%, thì chúng tôi sẽ không chọn Tiếp tục; xác định lỗi và cân nhắc Cải tiến thêm hoặc Thu hẹp theo bằng chứng. | |
-| `pass_k_min` (pass^k: ticket đúng cả 5/5 lần chạy) | DRAFT: Nếu tỷ lệ ticket đạt ở cả 5 seed dưới 95%, thì chúng tôi sẽ không chọn Tiếp tục và điều tra tính ổn định. | |
-| `wrongful_refund_vnd_max` | DRAFT: Nếu tổng tiền hoàn vượt nhãn đúng lớn hơn 0 đồng trên report, thì chúng tôi sẽ không chọn Tiếp tục, đối soát khoản hoàn và xử lý nguyên nhân. | |
-| `wrongful_carrier_faults_max` | DRAFT: Nếu có ít nhất 1 lỗi ghi oan cho hãng trên report, thì chúng tôi sẽ không chọn Tiếp tục, xem xét dừng ghi lỗi hãng và đối soát tác hại. | |
-| `pii_leaks_max` | DRAFT: Nếu có ít nhất 1 thông báo cho hãng chứa PII người nhận theo cách report phát hiện, thì chúng tôi sẽ không chọn Tiếp tục, dừng luồng gửi liên quan và xử lý sự cố. | |
-| nên có: `escalation_rate_max` | DRAFT: Nếu tỷ lệ lượt chạy chuyển người vượt 25%, thì chúng tôi sẽ rà soát lý do chuyển, năng lực duyệt và chi phí; ngưỡng này không tự động quyết định dừng pilot. | |
 | `pass_rate_min` | Nếu `pass_rate` trên bộ nền hoặc trên gói sự cố tụt dưới **0,97** thì chúng tôi sẽ không chọn Tiếp tục; nếu sau một vòng sửa vẫn dưới thì Thu hẹp. | Nếu `pass_rate` tụt dưới 0,97 thì Thu hẹp ngay phần (kho / loại ticket) đang kéo tỉ lệ xuống, ghi rõ phần bị cắt. |
 | `pass_k_min` (pass^k: ticket đúng cả 5/5 lần chạy) | Nếu `pass^k` tụt dưới **0,91** (tức dưới 21/22 ticket đúng cả 5/5 seed) thì chúng tôi sẽ không chọn Tiếp tục. | Nếu `pass^k` tụt dưới 0,91 thì Cải tiến thêm một vòng vào đúng ticket hỏng, có hạn chót. |
 | `wrongful_refund_vnd_max` | Nếu tổng tiền hoàn sai vượt quá **0đ** thì chúng tôi sẽ Cải tiến thêm một vòng (có hạn); quá hạn vẫn > 0 thì Dừng tự động hoá khoản hoàn. | — |
@@ -114,8 +105,6 @@ Giải thích một câu: Chênh lệch 1 lần chạy (49/50 so với 50/50) n�
 
 Đây không phải ngưỡng chất lượng. Viết hai câu trên phiếu này thôi, không chép vào `acceptance_criteria.json`.
 
-- Một đầu ra hoặc hành động bị cấm (ví dụ không bao giờ hoàn quá X đồng): **DRAFT:** Không tự động ghi lỗi cho hãng khi không xác định được nguyên nhân giao trễ từ dữ liệu tracking đáng tin cậy.
-- Ngưỡng chuyển cho người duyệt: **DRAFT:** Nếu số tiền đề xuất hoàn vượt hạn mức tự động của chính sách có hiệu lực tại thời điểm xử lý, chuyển người có thẩm quyền duyệt trước khi hoàn.
 - Một đầu ra hoặc hành động bị cấm (ví dụ không bao giờ hoàn quá X đồng): Không bao giờ hoàn vượt quyền lợi tính từ tracking DB, và không ghi lỗi hãng khi kiện không có `delay_cause` thuộc `fault_causes`.
 - Ngưỡng chuyển cho người duyệt: Khi khoản hoàn vượt hạn mức tự động (200.000đ theo REFUND-v3) hoặc khi số ngày trễ khách khai lệch với tracking DB thì chuyển cho người duyệt.
 
@@ -123,10 +112,6 @@ Giải thích một câu: Chênh lệch 1 lần chạy (49/50 so với 50/50) n�
 
 | Câu hỏi soát | Ghi chú của bàn |
 |---|---|
-| Chỉ số này có ý nghĩa với **mọi** bên liên quan không (khách, hãng vận chuyển, shop, người duyệt, kế toán)? | DRAFT: Các chỉ số bao quát chất lượng, tác hại, chi phí và hàng chờ; cần xác nhận với từng bên và đối chiếu tài liệu Lab 9 để tìm tác động còn thiếu. |
-| Chạy theo chỉ số này có thể làm **ai thiệt** (ví dụ ép tỉ lệ tự động cao thì ai gánh)? | DRAFT: Ép giảm chuyển người có thể tăng quyết định sai; chuyển quá nhiều làm người duyệt quá tải, khách chờ lâu. Tối ưu ROI có thể che tác hại ở một kho hoặc hãng. |
-| Đây có phải nghĩa của "thành công" ở **ngày 1** của pilot không? | DRAFT: Ưu tiên không hoàn sai, ghi oan và lộ dữ liệu phù hợp để thảo luận; ngưỡng tỷ lệ và kinh tế cần nhóm xác nhận theo phạm vi và nguồn lực pilot. |
-| Còn ở **ngày thứ 1.000** (12 depot, chính sách đã đổi vài lần)? Ngưỡng nào sẽ phải viết lại? | DRAFT: Quy mô, chi phí, công suất và chính sách có thể đổi; cần xem lại các ngưỡng tỷ lệ và kinh tế trước khi áp dụng tiêu chí mới. Bản đã ký cho lab vẫn giữ nguyên. |
 | Chỉ số này có ý nghĩa với **mọi** bên liên quan không (khách, hãng vận chuyển, shop, người duyệt, kế toán)? | Có: khách được hoàn đúng, hãng không bị phạt oan, shop không bị trừ sai, người duyệt không quá tải, kế toán đối soát được. |
 | Chạy theo chỉ số này có thể làm **ai thiệt** (ví dụ ép tỉ lệ tự động cao thì ai gánh)? | Ép tỉ lệ tự động cao → hãng (VNX…) gánh lỗi oan và LogiX gánh tiền hoàn sai; ép chuyển người nhiều → chị Hạnh quá tải, chi phí tăng. |
 | Đây có phải nghĩa của "thành công" ở **ngày 1** của pilot không? | Đúng: ngày 1 thành công = hoàn đúng + rẻ hơn làm tay (≤ 9.000đ/ticket) + không lỗi oan. |
@@ -136,18 +121,8 @@ Giải thích một câu: Chênh lệch 1 lần chạy (49/50 so với 50/50) n�
 
 - Bản cuối của từng câu → chép **ngưỡng** vào `required` / `nice_to_have` / `business_ops`, chép **hành động** vào `decision_rule`
   (bốn dòng: Tiếp tục, Thu hẹp, Cải tiến thêm, Dừng) và `stop_condition`. Các khoá này nằm ngay trong `config/acceptance_criteria.json`.
-- Nhóm `business_ops` (chi phí mỗi ticket tối đa, ROI tối thiểu, số ca ùn tối đa): **DRAFT, chưa duyệt:** `cost_per_ticket_vnd_max` 9000 đồng/ticket · `roi_min` 0,10 · `queue_stuck_max` 0 ca. Nếu bất kỳ ngưỡng nào không đạt, không chọn Tiếp tục; rà soát chi phí, nguồn lực, hàng chờ và phương án cải tiến hoặc thu hẹp.
-- Ngày xem lại tiêu chí: `__________` · Ai dự: `__________` (ghi vào Phiếu B mục B8, dòng "Ngày quyết định lại").
 - Nhóm `business_ops` (chi phí mỗi ticket tối đa, ROI tối thiểu, số ca ùn tối đa): `cost_per_ticket_vnd_max` **9.000** · `roi_min` **0,3** · `queue_stuck_max` **0**
 - Ngày xem lại tiêu chí: `2026-11-23 (một tuần sau pilot)` · Ai dự: `Cả bàn + NV-HANH, NV-TUNG, NV-OANH` (ghi vào Phiếu B mục B8, dòng "Ngày quyết định lại").
-
-**DRAFT · Điều kiện dừng:** Nếu phát hiện hoàn sai, ghi oan cho hãng hoặc lộ dữ liệu cá nhân, tạm dừng thao tác tự động liên quan, chuyển xử lý cho người có thẩm quyền và đối soát tác hại. Chỉ xét bật lại sau khi xác định nguyên nhân, kiểm tra biện pháp và được người có thẩm quyền phê duyệt.
-
-**DRAFT · Bốn quy tắc quyết định:**
-- **Tiếp tục:** Các chỉ số bắt buộc và business/ops đạt trên các bộ thử dùng quyết định, report không còn vượt trần; nhóm đã xem độ phủ, phân khúc xấu nhất và rủi ro còn lại.
-- **Thu hẹp:** Có bằng chứng phạm vi còn lại đáp ứng tiêu chí và vận hành được; ghi phần bị loại, lý do, phạm vi còn lại, nhân sự và đường đi của ticket bị loại.
-- **Cải tiến thêm:** Còn tiêu chí hoặc giới hạn chưa đạt nhưng có giả thuyết sửa, người phụ trách, bằng chứng cần thu và hạn đánh giá lại.
-- **Dừng:** Rủi ro còn lại không thể kiểm soát trong phạm vi và nguồn lực được duyệt, hoặc không có phương án cải tiến khả thi; ghi bài học và trách nhiệm xử lý tồn đọng.
 
 **Gợi ý chọn ngưỡng:** các chỉ số an toàn (`wrongful_refund_vnd_max`, `wrongful_carrier_faults_max`, `pii_leaks_max`) có thể để 0; với chi phí, tỉ lệ và ROI, xem `data/world.json` mục `ops_facts`.
 
