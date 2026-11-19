@@ -1,8 +1,8 @@
 # Phiếu C · Sự cố và quyết định v2 · Khối 3 (phút 125–200)
 
-**Bàn:** Simple · **Thẻ đã bốc:** S4 *(để trống tới phút 125; bốc số xong thì ghi đúng số đó, ví dụ `S3`. Lab Coach đối chiếu với sổ; lệnh tự kiểm tra in dòng này trong report.)*
+**Bàn:** Simple · **Thẻ đã bốc:** S4 *(Lab Coach đối chiếu với sổ; lệnh tự kiểm tra in dòng này trong report.)*
 
-Mở `incidents/Sx/card.md` của đúng số đã bốc. Các bước trên thẻ trỏ về đúng mục trong phiếu này. Mục C3 chỉ điền phần ứng với
+Mở `incidents/S4/card.md` của đúng số đã bốc. Các bước trên thẻ trỏ về đúng mục trong phiếu này. Mục C3 chỉ điền phần ứng với
 số thẻ của bàn; các phần khác để trống.
 
 **Mục lục**
@@ -44,7 +44,7 @@ Mỗi lệnh `lab10.eval` và `lab10.grade` tự ghi một dòng vào `runs/jour
 Chạy **trước khi sửa bất cứ thứ gì**:
 
 ```bash
-python3 -m lab10.grade --incident Sx
+python3 -m lab10.grade --incident S4
 ```
 
 - Mã lần chạy grade: `R-S4-grade-20261119-165027-eee280` · base: `R-S4-before-20261119-165028-eee280` · prepared: `R-S4-prepared-20261119-165028-eee280`
@@ -70,7 +70,7 @@ python3 -m lab10.grade --incident Sx
 Dò ít nhất 2 ticket hỏng theo kiểu KHÁC nhau:
 
 ```bash
-python3 -m lab10.trace --suite Sx --ticket <ID> --seed 11
+python3 -m lab10.trace --suite S4 --ticket <ID> --seed 11
 ```
 
 Ba loại lỗi: **giới hạn của hệ thống** · **lỗi ngữ cảnh** · **lỗi chìm** (cả người dùng lẫn hệ thống đều không nhận ra; nguy hiểm nhất,
@@ -260,9 +260,9 @@ Kiểm bằng gì (hàm trong `guards.py`, dòng report nào): `write_gate`/even
 
 ### Câu 3.3 · Một giả định về môi trường mà người thiết kế đã ngầm tin, nhưng nhiều khả năng sai ngoài thực tế
 
-Giả định (thứ nằm NGOÀI phần mềm): …
+Giả định (thứ nằm NGOÀI phần mềm): Trong ca cao điểm sẽ có đủ người duyệt đã được đào tạo và người dự phòng có thể được gọi kịp; Ops/Finance công bố đúng ngân sách/ngưỡng trước ca; lượng ticket theo giờ được dự báo đủ sát để quyết định giảm tải. Các giả định này có thể sai khi 30 ticket đến trong một giờ hoặc người dự phòng không sẵn sàng.
 
-Vì sao có thể sai: …
+Vì sao có thể sai: S4 có 30/41 ticket đến trong một giờ trong khi một người chỉ duyệt khoảng 6 ca/giờ; đây là giới hạn nhân lực và thời điểm đến ngoài phần mềm. Báo cáo cũng cho thấy cap nhóm 500.000đ không khớp ngân sách Finance 300.000đ của thẻ.
 
 ---
 
@@ -314,8 +314,8 @@ Sửa NGOÀI model, đúng chỗ cho từng nguyên nhân. Code: `lab10/guards.p
 `config/operating_gates.json` (phạm vi, người trực, trần, ngân sách, kiểm mẫu, ghi chú giải thích, cổng pháp lý). Rồi chạy:
 
 ```bash
-python3 -m lab10.eval --suite Sx --stage after --note "đổi MỘT thứ: ..."
-python3 -m lab10.grade --incident Sx
+python3 -m lab10.eval --suite S4 --stage after --note "đổi MỘT thứ: ..."
+python3 -m lab10.grade --incident S4
 ```
 
 | Nhánh fault tree | Nguyên nhân | Chỗ sửa (hàm + nhánh trong `guards.py`, hoặc khoá trong `operating_gates.json`) | Tầng (phát hiện / chặn / giới hạn thiệt hại / vận hành) | GIẢM khả năng hay NGĂN hẳn? Vì sao | Mã lần chạy sau khi sửa |
@@ -390,26 +390,30 @@ Ghi các dòng đổi sau sự cố. Mỗi dòng vẫn phải có một PIC có 
 
 | # nhóm | Trạng thái mới (Xong / Chưa / Không áp dụng) | Bằng chứng mới (mã lần chạy, mục phiếu, số trong report) | PIC |
 |---|---|---|---|
-| | | | |
-| | | | |
+| 1 Chất lượng / tính toàn vẹn | Chưa | Grade `R-S4-grade-20261119-170730-3f3824`: các chỉ số an toàn S4 sau là 0 và pass_rate/pass_k là 1,0000; nhưng `integrity.ok=false`, 19 file khóa bị lệch MANIFEST. Cần chủ repo xác minh nguồn trước khi coi kết quả là go-live evidence. | Ngô Ngọc Hải |
+| 3 Bảo mật | Chưa | B4 đã xác định `customer_note` là dữ liệu tự do; S4 after `pii_leaks=0`, nhưng grade integrity chưa đạt và chưa có kiểm chứng payload trên pilot thật. | Trần Minh Đức |
+| 5 Hiệu năng, hạ tầng | Chưa | S4 after: `queue.wait_max_min=82` > 60, `queue.stuck=5`; một người × 6 ca/giờ không đáp ứng đỉnh tải. | Trần Minh Đức |
+| 7 Vận hành | Chưa | S4 after còn 5 ca ùn; report có `ops.violations`. Ngưỡng gọi hỗ trợ đã nêu ở B7.6 nhưng chưa được vận hành/đo trong pilot. | Trần Minh Đức |
+| 8 Con người, pháp lý | Chưa | S4 after ghi 0 lỗi hãng oan và 0 PII; cần xác minh integrity, quy trình khiếu nại và quyền dừng trước go-live. | Trần Minh Đức |
+| 9 Quyết định | Chưa | S4 after còn chờ 82 phút, 5 ca ùn và 422.000đ > ngân sách 300.000đ; chưa có quyết định v2 được cả bàn chốt ở C12. | Lê Thị Ly |
 
 ### Runbook 4 · Sau sự cố trên thẻ (vòng 2)
 
 | Câu hỏi | Trả lời |
 |---|---|
-| Tín hiệu nào ở Runbook 2 (Phiếu B mục B7.5) lẽ ra phải báo trước sự cố này? Nó đã có chưa? | |
-| Bàn thêm hoặc đổi ngưỡng nào, từ bao nhiêu thành bao nhiêu? | |
-| Bàn đổi gì về **người** (số người trực, ai đứng tên, ai được gọi)? | |
-| Bàn đổi gì về **phạm vi** hoặc **quy trình** (kiểm mẫu, ghi chú giải thích, trần)? | |
-| Nói gì với bên thứ ba bị ảnh hưởng (hãng, shop, người nhận, nhân viên duyệt), ai nói, trong bao lâu? | |
-| Dữ liệu cá nhân nào đã rời hệ thống mà không thu hồi được? Báo cho ai? | |
-| Sự cố lộ ra trước qua số máy đo, phản hồi của người, hay đọc nội dung? Nguồn nào bàn chưa có? | |
+| Tín hiệu nào ở Runbook 2 (Phiếu B mục B7.5) lẽ ra phải báo trước sự cố này? Nó đã có chưa? | Có `queue_wait_max`, `queue_stuck` và tổng hoàn/ngân sách trong report. Ngưỡng vàng 30 phút/đỏ 60 phút và ngưỡng Finance phải phát cảnh báo trước khi chạm trần; grade S4 after ghi 82 phút, 5 ca ùn và 422.000đ > 300.000đ. |
+| Bàn thêm hoặc đổi ngưỡng nào, từ bao nhiêu thành bao nhiêu? | Giữ SLA đỏ 60 phút, gọi hỗ trợ từ >6 ca chờ hoặc >30 phút. Đổi cảnh báo hoàn từ 80% của cap 500.000đ (=400.000đ) sang 80% ngân sách Finance 300.000đ (=240.000đ), dừng hoàn tự động tại 300.000đ. Đây là đề xuất; Ly cần cập nhật business cap và chạy lại. |
+| Bàn đổi gì về **người** (số người trực, ai đứng tên, ai được gọi)? | NV-HANH duyệt, NV-TUNG là PIC gọi người dự phòng và giữ công tắc. Gọi thêm người khi >6 ca chờ hoặc >30 phút; không coi việc thêm một người là đủ nếu chưa đo lại hàng chờ/ROI. |
+| Bàn đổi gì về **phạm vi** hoặc **quy trình** (kiểm mẫu, ghi chú giải thích, trần)? | Khi chờ >60 phút/có ca ùn: tạm dừng lệnh ghi tự động, chuyển tay và thu hẹp phạm vi còn >0. Cảnh báo tài chính ở 240.000đ, hard stop 300.000đ. Mô phỏng what-if chưa ghi journal cho HCM-only + cap 300.000đ cho coverage 26,83%, chờ 6 phút, 0 ùn, ROI 0,61; đây chỉ là phương án để Ly/Hải chạy lại bằng `eval`, chưa phải kết quả chính thức. |
+| Nói gì với bên thứ ba bị ảnh hưởng (hãng, shop, người nhận, nhân viên duyệt), ai nói, trong bao lâu? | NV-OANH đối soát với hãng/shop; NV-HANH thông tin cho CSKH/người duyệt về các quyết định bị rà soát. NV-TUNG điều phối qua `slack:#logix-refund-pilot` trong ca; chỉ thông báo khoản đã xác minh, không suy đoán hoặc tiết lộ PII. |
+| Dữ liệu cá nhân nào đã rời hệ thống mà không thu hồi được? Báo cho ai? | S4 report hiện `pii_leaks=0`, nên chưa có bằng chứng PII rời hệ thống; không tuyên bố có sự cố lộ. Nếu payload/log thực tế xác nhận lộ, NV-TUNG bảo toàn log và báo đầu mối pháp lý/Privacy cùng NV-OANH ngay, không xóa dấu vết. |
+| Sự cố lộ ra trước qua số máy đo, phản hồi của người, hay đọc nội dung? Nguồn nào bàn chưa có? | Số đo report phát hiện chờ 82 phút/5 ca ùn và hoàn vượt ngân sách; phản hồi của giám sát giúp nhận diện đỉnh tải. `grade` báo `monitor.ok=false` vì chưa có monitor mới; cần metric/alert trực tiếp theo hàng chờ, tốc độ ticket đến và tổng hoàn theo ngày. |
 
 ### Runbook 5 · Ba kịch bản "nếu … thì …" cho tuần đầu chạy thử thật
 
-1. Nếu số ticket tăng gấp ___ lần trong một giờ thì: …
-2. Nếu nhà cung cấp LLM lỗi quá ___ phút thì: …
-3. Nếu người duyệt báo không tin một quyết định của trợ lý thì: …
+1. Nếu tốc độ đến vượt 6 ticket/giờ/người hoặc hàng chờ >6 ca thì NV-TUNG gọi người dự phòng; nếu chờ >60 phút/có ca ùn thì dừng lệnh ghi tự động, chuyển thủ công và thu hẹp phạm vi.
+2. Nếu nhà cung cấp LLM lỗi liên tục quá 5 phút thì fail-closed: dừng các lệnh ghi tự động, không dùng fallback để tự duyệt, chuyển ticket sang người; NV-TUNG chỉ bật lại sau khi Hải xác minh lỗi đã hết và người duyệt ký.
+3. Nếu người duyệt không tin một quyết định thì tạm dừng thao tác liên quan, kiểm tra 100% các ca cùng kiểu trong ca đó, ghi lý do và chỉ bật lại khi NV-HANH cùng NV-TUNG xác nhận bằng chứng.
 
 ---
 
