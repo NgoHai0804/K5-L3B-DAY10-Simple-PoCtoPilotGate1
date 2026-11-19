@@ -141,7 +141,7 @@ Gợi ý: mở `data/world.json` phần `policies`, `orders[].parcels`, `ops_lim
 | Người dùng | Khách gửi yêu cầu hoàn tiền; nhân viên CSKH và người duyệt xử lý ca chuyển người; kế toán đối soát. Hãng vận chuyển và shop là các bên chịu ảnh hưởng. |
 | Việc người dùng cần làm xong | Khách cần yêu cầu được xử lý và trả lời; người duyệt cần nhận ca cần can thiệp; kế toán cần đối soát tiền hoàn và trách nhiệm hãng/shop. |
 | Đầu ra của hệ thống (kể cả các lệnh ghi) | Trạng thái xử lý hoặc chuyển người; ghi hoàn tiền vào sổ cái (`issue_refund`), ghi lỗi hãng (`file_carrier_fault`), thông báo hãng (`notify_carrier`) và trả lời khách (`send_reply`). |
-| Dữ liệu trợ lý đọc lúc chạy (bảng nào trong `data/world.json`) | Ticket từ `data/tickets.jsonl`; trong world mock: `orders` và `parcels`, `policies`, `approvals`, sổ cái khởi tạo `ledger_seed`, `ops_facts` và dữ liệu vận hành. Cổng dùng `config/operating_gates.json`. |
+| Dữ liệu trợ lý đọc lúc chạy (bảng nào trong `data/world.json`) | Ticket từ `data/tickets.jsonl`, gồm nội dung khách viết; trong world mock: `orders` và `parcels`, `policies`, `approvals`, sổ cái khởi tạo `ledger_seed`, `ops_facts` và dữ liệu vận hành. Agent cũng có thể đọc `order.checkout_note` và dùng tín hiệu model trích xuất; cổng dùng `config/operating_gates.json`. |
 | Trường then chốt quyết định tiền và lỗi hãng | Tiền: `shipping_fee_vnd`, `goods_value_vnd`, `promised_date`, `delivered_date`, `as_of`, `delay_cause`, `policies[].late`, `no_refund_causes`, `auto_limit_vnd`, phê duyệt và `refund_status`. Lỗi hãng: `parcel_id`, `carrier_id`, ngày hẹn/giao, `delay_cause`, `fault_causes` và ngưỡng trễ. |
 | Với mỗi trường then chốt: **nguồn sự thật** hay **bản sao** (ai cập nhật, khi nào)? | Trong lab, `orders/parcels` là dữ liệu tra cứu đơn/tracking; `policies` là bảng policy mock, còn `index_active` là cờ chỉ mục agent mặc định dùng để chọn; `approvals` và `ledger_seed` là trạng thái mock được nạp. Text ticket là lời khách khai, không phải tracking. `refund_status` là cờ cập nhật theo lô hằng đêm theo code, có thể cũ hơn sổ cái. Công cụ đọc trả bản sao trong bộ nhớ. Nguồn production, người cập nhật và tần suất đồng bộ **chưa biết, cần xác nhận**; không coi mock là nguồn production. |
 | Định dạng cần để ý (ngày, trường được phép trống, đơn nhiều kiện) | Ngày `YYYY-MM-DD`; `delivered_date` có thể `null`, helper dùng `as_of` thay thế; `delay_cause` có thể thiếu; `effective_to` có thể `null`; tiền là số nguyên VND. Một đơn có thể có nhiều kiện với mã, hãng, ngày và nguyên nhân riêng. |
@@ -157,7 +157,7 @@ Chúng tôi biết thế giới thật sẽ làm dữ liệu lệch ở: `giả 
 trường nào cho thấy `effective_from, effective_to, index_active, auto_limit_vnd, fault_causes và late` · con số nào của Bản tiêu chí bị ảnh hưởng `có thể ảnh hưởng wrongful_refund_vnd, wrongful_carrier_faults, pass_rate, pass_k; gián tiếp queue_stuck, cost_per_ticket_vnd, roi`.
 Đây là đầu vào đổi hay quan hệ vào–ra đổi? Chỉ số nào sẽ phát hiện? `Quan hệ vào–ra đổi do chính sách: cùng đầu vào có thể dẫn đến tiền hoàn, duyệt hoặc lỗi hãng khác. Metric đề xuất: tỷ lệ lượt dùng policy không khớp khoảng hiệu lực; tử số là lượt có policy_id khác policy hiệu lực theo ngày xử lý; mẫu số là lượt có đủ policy_id, ngày và dữ liệu hiệu lực. Đếm riêng lượt thiếu dữ liệu, không tìm được policy hoặc policy chồng hiệu lực; không coi là an toàn. Giới hạn: chỉ thấy lệch phiên bản so với lịch được cung cấp, không chứng minh lịch đúng hay phát hiện mọi sai lệch tracking; cần xác nhận nguồn ngày xử lý và lịch hiệu lực trong giám sát.`
 
-Trong mock, v4 giảm `auto_limit_vnd` từ 200.000 xuống 100.000 đồng, bỏ `FORCE_MAJEURE` khỏi `fault_causes` và đổi ngưỡng ngày trễ. **Suy luận từ code:** agent mặc định dùng `index_active` thay vì tự chọn theo khoảng hiệu lực; nếu cờ không cập nhật và không ghim đúng policy, agent có thể dùng v3 sau ngày đổi. Điều này có thể làm sai tiền hoàn hoặc ghi oan hãng và tăng nhu cầu duyệt khi dùng đúng hạn mức mới. Đây là giả thuyết rủi ro, **chưa có bằng chứng thực nghiệm**; metric trên cũng chưa được đăng ký hay đo.
+Trong mock, v4 giảm `auto_limit_vnd` từ 200.000 xuống 100.000 đồng, bỏ `FORCE_MAJEURE` khỏi `fault_causes` và đổi ngưỡng ngày trễ. **Suy luận từ code:** agent mặc định dùng `index_active` thay vì tự chọn theo khoảng hiệu lực; nếu cờ không cập nhật và không ghim đúng policy, agent có thể dùng v3 sau ngày đổi. Điều này có thể làm sai tiền hoàn hoặc ghi oan hãng và tăng nhu cầu duyệt khi dùng đúng hạn mức mới. Với đơn nhiều kiện, code chọn kiện trễ nhất để tính độ trễ nhưng lấy kiện đầu tiên khi ghi lỗi hãng; cần Hải và Đức xác nhận cách kiểm soát và quy tắc nghiệp vụ. Đây là giả thuyết rủi ro, **chưa có bằng chứng thực nghiệm**; metric trên cũng chưa được đăng ký hay đo.
 
 **Ví dụ một dòng (đừng chép):** trường then chốt `parcels[].delivered_date` · bản ghi do máy quét ở điểm phát tạo ra, là nguồn
 sự thật về ngày giao · lệch khi điểm phát quét sót hoặc nhập bù bằng tay.
@@ -270,7 +270,7 @@ Bốn lăng kính (bắt buộc đủ cả bốn; dự án AI hay chết ở ba 
 | Lý do thất bại (viết ở thì quá khứ) | Lăng kính | Kiểm được hôm nay? (trace / data / config nào) | Thành cổng phòng ngừa nào (code hay config) / hay vào risk register |
 |---|---|---|---|
 | | Kỹ thuật | | |
-| | Kinh doanh | | |
+| **DRAFT, chờ cả bàn review:** Chi phí xử lý mỗi ticket đã vượt mục tiêu kinh doanh khi nhiều ca phải chuyển người, làm hiệu quả pilot suy giảm. | Kinh doanh | `data/world.json` → `ops_facts`; sau khi có report, đối chiếu chi phí/ticket, ROI và hàng chờ theo mã lần chạy. Đây là rủi ro giả định, chưa phải kết quả đã đo sau cổng. | Đề xuất xem `business.cost_budget_per_ticket_vnd` và phạm vi pilot tại B7.4; lựa chọn cổng và nguồn lực do cả bàn quyết. |
 | | Con người và vận hành | | |
 | | Pháp lý | | |
 | | | | |
@@ -330,6 +330,13 @@ Mỗi con số kèm một câu lý do, lấy từ `data/world.json` → `ops_lim
 | `business.cost_budget_per_ticket_vnd` | 1.500 | Bằng trần chi phí LLM/ticket `ops_limits.max_llm_cost_per_ticket_vnd` (1.500đ). |
 | `business.pilot_scope` (all / warehouse / percent) | {"mode":"all"} | Vòng 1 giữ toàn bộ (độ phủ 1,0); chỉ thu hẹp khi có bằng chứng phân khúc xấu — thẻ S4 là bằng chứng cho vòng 2. |
 | `business.roi_min` | 0,3 | Lớn hơn 0 và khớp `roi_min` đã ký; làm tay tốn 10.000đ/ticket (`ops_facts`) nên ROI dương là điều kiện có lời. |
+
+**Cách đo và điều kiện áp dụng — DRAFT, chờ Hải, Đức và cả bàn xác nhận:**
+
+- **Trần hoàn tự động:** so tổng tiền hoàn không có `approval_id` của ngày mô phỏng với 1.500.000 đồng; khoản tiếp theo làm vượt trần được chuyển người. Không kết luận khoản hoàn dưới trần là đúng. Đức xác nhận năng lực duyệt và đường xử lý; Hải kiểm biên trần và phê duyệt.
+- **Ngân sách đọc:** theo dõi chi phí đã dùng cộng chi phí đọc tiếp theo và số ca chuyển người khi vượt 1.200 đồng; kiểm thêm chi phí cuối ticket so với trần LLM mock 1.500 đồng. Ngân sách này không phải tổng chi phí mỗi ticket tối đa 9.000 đồng trong tiêu chí đã ký; Hải kiểm các bước phát sinh chi phí sau đọc và retry, Đức xác nhận tải duyệt.
+- **Phạm vi HN/HCM:** đọc `coverage`, số ticket trong/ngoài phạm vi và kết quả theo kho trong report; ticket ngoài phạm vi theo quy trình thủ công. HN/HCM chưa được chọn chính thức; ticket không tìm thấy đơn vẫn vào phạm vi theo code, nên cần Hải kiểm hành vi và Đức xác nhận quy trình, năng lực hai depot.
+- **ROI:** report tính tiết kiệm ròng chia tổng chi phí agent, duyệt và trực; tiết kiệm ròng trừ cả hoàn sai. So với 0,30 đã ký và đọc thêm chi phí, an toàn và từng phân khúc; ROI đạt không thay thế các ngưỡng an toàn. Đức xác nhận giả định chi phí người, cả bàn chốt ngưỡng vận hành.
 
 ### B7.5 · Câu 2.10 · Cổng con người, vận hành, pháp lý + Runbook phần 1–3
 
@@ -410,6 +417,22 @@ bao nhiêu thời gian? (3) Có phần nào của dự án không nên làm ti�
 
 | | **v1** (phút 105–115, TRƯỚC khi nhận thẻ sự cố) |
 |---|---|
+| Commit ký tiêu chí (message `Sign acceptance criteria`; hash commit, tuỳ chọn) | `2e78acd` — đã có trong lịch sử Git; thời điểm ký và hash đối chiếu Phiếu A A5 / `config/acceptance_criteria.lock`. |
+| Hash chốt cổng vòng 1 (8 ký tự lệnh `lab10.checkpoint` in ra, tuỳ chọn) | |
+| Mã lần chạy dùng làm bằng chứng | bộ nền, mốc base: ________ · bộ nền với cổng vòng 1 (prepared): ________ |
+| Còn dòng "vượt trần" nào trong report? (hàng chờ, chi phí, ROI, trần tiền, pháp lý) | |
+| Kho hoặc hãng có số xấu nhất: ____. Nếu chỉ nhìn phân khúc này, quyết định có đổi không? *(Đọc khối "theo kho và hãng" ở cuối output `lab10.eval` / `lab10.grade`, hoặc mục `by_segment` trong `report.json`.)* | |
+| Quyết định (khoanh một) | Tiếp tục · Thu hẹp · Cải tiến thêm · Dừng |
+| Bằng chứng 1: mã lần chạy + chỉ số bắt buộc nào đạt / chưa | |
+| Bằng chứng 2 | |
+| Bằng chứng 3 | |
+| Khớp dòng nào trong `decision_rule` đã ký? | |
+| Nếu Thu hẹp: cắt phần nào, vì sao | |
+| Nếu Cải tiến thêm: giả thuyết cụ thể + hạn | |
+| Nếu Dừng: bài học ghi lại | |
+| Một bằng chứng còn thiếu (thứ bộ nền chưa đo được) | **BLOCKED:** Chưa có report `prepared` và checkpoint vòng 1 tại workspace; dữ liệu mock chưa chứng minh tác động, năng lực duyệt và chi phí trong pilot thật. Cần Hải/Đức xác nhận nguồn bằng chứng. |
+| Ngày quyết định lại (trừ khi Dừng) | |
+| PIC ký | |
 | Commit ký tiêu chí (message `Sign acceptance criteria`; hash commit, tuỳ chọn) | `2e78acd` (Sign acceptance criteria) |
 | Hash chốt cổng vòng 1 (8 ký tự lệnh `lab10.checkpoint` in ra, tuỳ chọn) | `12398971` |
 | Mã lần chạy dùng làm bằng chứng | bộ nền, mốc base: R-base-before-20261119-153723-b45eeb · bộ nền với cổng vòng 1 (prepared): R-base-prepared-20261119-161030-535bf6 |
