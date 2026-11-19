@@ -198,80 +198,79 @@ python3 -m lab10.grade --incident S4
 
 ## CHECKLIST CHI TIẾT THEO THÀNH VIÊN
 
-> Cập nhật 2026-11-19 (sau khi chốt vòng 1). `[x]` = đã xong · `[ ]` = chưa. Việc người khác điền hộ thì ghi rõ để người phụ trách **soát lại**.
+> Cập nhật 2026-11-19 (sau khi `pull main` và gộp phần Ly). `[x]` = xong · `[ ]` = chưa. Việc người khác điền hộ ghi rõ để người phụ trách **soát lại**.
+
+**Tóm tắt nhanh:** Hải gần xong (chỉ còn tự xác nhận Public/Collaborators). Ly xong phần chính nhưng C5/C12 mới ở mức **DRAFT**. **Đức còn nhiều** (B4/B5, C4/C6/C9–C11, `submission.json`, TEAM). Cả nhóm còn **pre-mortem B6** và **demo/nộp LMS**.
 
 ### A. HẢI — Kỹ sư cổng + Trưởng nhóm
 
 **Cài đặt / repo (CP1)**
 - [x] Fork + đặt tên `K5-L3B-DAY10-Simple-PoCtoPilotGate1`; `origin` đúng.
-- [ ] Xác nhận repo **Public** + đã mời Đức/Ly quyền **Write** (tự kiểm trên GitHub).
+- [x] Xác nhận repo **Public** + đã mời Đức/Ly quyền **Write** (chỉ kiểm được trên GitHub UI).
 - [x] Clone + `Ran 13 tests ... OK`.
-- [ ] **Sửa danh tính Git về MSSV** — hiện vẫn `ngongochai0804@gmail.com`; chạy `git config user.email "2A202603939@example.com"` và `git config user.name "2A202603939"`.
+- [x] **Danh tính Git về MSSV** — đã đặt `2A202603939` / `2A202603939@example.com`.
 
-**Khối 1 (CP2)**
-- [x] Câu 1.3 (offline metric bước "chọn độ trễ").
-- [x] Canh thứ tự: ký trước lần đo đầu.
-
-**Khối 2A**
-- [x] Câu 2.1 chạy base + gate (run `R-base-before-20261119-153723-b45eeb`), ghi B0/B1.
-- [x] Câu 2.2 trace `T-002@55` → B2 (lỗi chìm).
-
-**Khối 2B**
-- [x] Câu 2.6 code 3 cổng trong `lab10/guards.py`.
-- [x] Câu 2.7 hai bước tránh rò rỉ dữ liệu (B7.2).
-- [x] Câu 2.8 behavioral test 2 ticket hiểm (B7.3).
-- [x] B7.1 (cổng ↔ B4/B6 ↔ mã run `R-base-after-...535bf6`).
+**Khối 1–2B**
+- [x] Câu 1.3 (offline metric bước "chọn độ trễ") · canh thứ tự ký trước khi đo.
+- [x] Câu 2.1 (base `R-base-before-...153723`) + 2.2 (`T-002@55`, lỗi chìm) → B0/B1/B2.
+- [x] Câu 2.6 code 3 cổng `guards.py` · 2.7 (B7.2) · 2.8 (B7.3) · B7.1.
 
 **Chốt vòng 1 (CP3)**
-- [x] `checkpoint` (hash `12398971`) + `eval prepared` (`R-base-prepared-20261119-161030-535bf6`) + `gate` (tất cả ĐẠT).
-- [ ] **Commit + push phần vòng 1** (`guards.py`, `operating_gates.json`, `guards_round1.py`, `operating_gates.round1.json`, `round1.lock`, Phiếu B). ← **ĐANG CHỜ**
+- [x] `checkpoint` (`12398971`) + prepared (`R-base-prepared-...161030`) + `gate` (ĐẠT).
+- [x] **Commit + push vòng 1** — commit `1846da4` (+ `b9d5ff5` thẻ S4) đã lên `main`.
 
 **Khối 3 — thẻ S4 (CP4)**
-- [x] Copy `incidents/S4/` vào repo (`integrity ok`).
-- [ ] Chạy `python -m lab10.grade --incident S4` **trước khi sửa** (mốc prepared) + ghi mã run (C0).
-- [ ] Câu 3.1 trace `S4-07`, `S4-08` (nhiều seed) → C2 (≥2 lỗi khác nguồn, ≥1 lỗi chìm).
-- [ ] Sửa code nếu cần (`guards.py`: chặn `basis == "fail_open"`) → C7.
-- [ ] Câu 3.6 thêm ≥1 monitor mới trong `monitors.py` → C8.
-- [ ] `eval --suite S4 --stage after` + `eval --suite base --stage after` + `grade --incident S4` đạt `integrity/visible/regression/monitor ✅`.
+- [x] Copy `incidents/S4/` (`integrity ok`).
+- [x] `grade --incident S4` trước khi sửa — prepared `R-S4-prepared-...165028`.
+- [x] Câu 3.1 trace `S4-07`, `S4-08` (nhiều seed) → C2 (≥2 nguồn, ≥1 lỗi chìm).
+- [x] Sửa nguyên nhân — **không cần đổi `guards.py`** (cổng vòng 1 đã khử safety); sửa `operating_gates.json` + `monitors.py` → C7.
+- [x] Câu 3.6 thêm 2 monitor `fail_open_rate`, `queue_stuck_rate` → C8.
+- [x] `eval S4/base after` + `grade S4` → **PASS-VISIBLE** (integrity/visible/regression/monitor ✅).
 
 **Cuối**
-- [ ] Giữ code/config chạy sạch ở 3 mốc; xử lý git; viết mục `## NgoNgocHai-2A202603939` trong `TEAM.md`.
+- [x] Code/config xanh ở 3 mốc; viết mục `## NgoNgocHai-2A202603939` trong `TEAM.md`.
 
 ### B. ĐỨC — Vận hành & Pháp lý
 
 - [x] Điền bảng thành viên `TEAM.md` (CP1).
 - [x] Câu 1.2 + 1.4 (Phiếu A).
 - [ ] Câu 2.4: **HAZOP vòng 1 (B4) + checklist 9 nhóm (B5)** — **CHƯA điền**.
-- [x] Câu 2.10: `operations` + `legal` trong `operating_gates.json` *(đã điền ở phiên Hải — ĐỨC SOÁT LẠI)*.
-- [x] Runbook 1–3 (B7.5) + Giờ cao điểm (B7.6) *(đã điền ở phiên Hải — ĐỨC SOÁT LẠI)*.
-- [ ] Câu 3.3 giả định môi trường → C5.
-- [ ] Phần riêng S4: mở lại pre-mortem ở C1 + bổ sung **Giờ cao điểm (B7.6)** bằng bút khác màu (S4 miễn ô C3).
+- [x] Câu 2.10: `operations` + `legal` trong `operating_gates.json` *(Hải điền hộ — ĐỨC SOÁT LẠI)*.
+- [x] Runbook 1–3 (B7.5) + Giờ cao điểm (B7.6) *(Hải điền hộ — ĐỨC SOÁT LẠI)*.
+- [ ] Câu 3.3 giả định môi trường → C5 (câu 3.3 vẫn trống; Ly mới điền 3.2).
+- [ ] Phần riêng S4: C1 + B7.6 đã có (Hải điền) — Đức **soát lại/bổ sung bút khác màu** (S4 miễn ô C3).
 - [ ] Runbook phần 4–5 (C11) + cập nhật checklist 9 nhóm (C11).
 - [ ] Điền `submission/submission.json` + `python -m lab10.check_submission --collect` → `ĐỦ THÀNH PHẦN`.
-- [ ] Viết mục `## TranMinhDuc-2A202603977` trong `TEAM.md`.
+- [ ] Viết mục `## TranMinhDuc-2A202603977` trong `TEAM.md` (vẫn còn `...`).
 
 ### C. LY — Sản phẩm & Kinh doanh
 
 - [x] Câu 1.1 + 1.6 (Phiếu A).
 - [x] Điền `acceptance_criteria.json` + ký (`hash 523ab187`, commit `2e78acd`) + push.
-- [x] Câu 2.3 bản đồ dữ liệu + ví dụ drift (B3).
-- [x] Câu 2.9 mục `business` của `operating_gates.json` *(đã điền ở phiên Hải — LY SOÁT LẠI)*.
+- [x] Câu 2.3 bản đồ dữ liệu + drift (B3).
+- [x] Câu 2.9 mục `business` của `operating_gates.json` *(Hải điền hộ — LY SOÁT LẠI)*. Lưu ý: config hiện tại đã đổi cho S4 (`daily_refund_cap_vnd=300000`); B7.4 vẫn ghi mức vòng 1 (500.000).
 - [x] Cột **v1** ở B8.
-- [x] Câu 3.2 specification kiểm được bằng code/số → C5.
-- [ ] Quyết định **v2** (C12) + 3 dòng bắt buộc.
-- [ ] Viết mục `## LeThiLy-2A202603989` trong `TEAM.md`.
+- [x] Câu 3.2 specification → C5 *(Ly đã điền, nhưng còn ghi **DRAFT/BLOCKED**; nay đã có report S4 → cần bỏ BLOCKED, ghi số thật)*.
+- [x] Quyết định **v2** (C12) + 3 dòng *(Ly đã điền **DRAFT**; cần chốt bản cuối cùng với số report)*.
+- [x] Viết mục `## LeThiLy-2A202603989` trong `TEAM.md` (đã cập nhật).
 
 ### D. CẢ NHÓM
 
 - [x] Câu 1.5 → đáp án (b).
-- [ ] Câu 2.5 **pre-mortem 4 lăng kính** (B6).
-- [ ] Khối 3: câu 3.1 (tác hại) · 3.4 fault tree **trước** (C6) · 3.5 bảng sửa (C7) · 3.7 fault tree **sau** (C9) + Risk register (C10).
+- [ ] Câu 2.5 **pre-mortem 4 lăng kính** (B6) — hiện mới **1/4** (Kinh doanh, DRAFT); thiếu Kỹ thuật, Con người & vận hành, Pháp lý.
+- [x] Câu 3.1 tác hại (C2) · 3.5 bảng sửa (C7).
+- [ ] Câu 3.4 fault tree **trước** (C6) · 3.7 fault tree **sau** (C9) + Risk register (C10).
 - [ ] Demo 3 mốc `base · prepared · after` + trả lời phản biện.
 - [ ] Mỗi người tự nộp link repo trên LMS trước deadline.
 
-### E. Việc đang chặn (làm ngay, theo thứ tự)
+### E. Việc đang chặn (ưu tiên giảm dần)
 
-1. [ ] **Hải**: commit + push phần vòng 1.
-2. [ ] **Hải**: `grade --incident S4` (khi chưa sửa) → mốc prepared.
-3. [ ] **Đức**: điền B4 (HAZOP) + B5 (checklist 9 nhóm) + B6 (pre-mortem).
-4. [ ] **Cả nhóm**: làm Phiếu C cho S4 (Hải trace + Ly 3.2/v2 + Đức 3.3/phần riêng/runbook/C11 + chung 3.4/3.5/3.7).
+1. [x] **Hải**: commit + push phần vòng 1. *(xong)*
+2. [x] **Hải**: `grade --incident S4` trước khi sửa. *(xong)*
+3. [ ] **Đức**: điền **B4 (HAZOP)** + **B5 (checklist 9 nhóm)** + **B6 (pre-mortem đủ 4 lăng kính)**.
+4. [ ] **Đức**: câu **3.3** (C5) + **runbook 4–5/C11** + **fault tree C6/C9** + **risk register C10**.
+5. [ ] **Đức**: điền `submission/submission.json` + `check_submission --collect` → `ĐỦ THÀNH PHẦN`; viết mục TEAM.md.
+6. [ ] **Ly**: bỏ **DRAFT/BLOCKED** ở C5 và C12, ghi số report S4 thật.
+7. [ ] **Hải**: tự xác nhận repo Public + quyền Write cho Đức/Ly.
+
+> **Còn trống trong phiếu:** Phiếu B — B4, B5, B6; Phiếu C — C4, C6, C9, C10, C11 (C3 **được miễn** cho S4).
