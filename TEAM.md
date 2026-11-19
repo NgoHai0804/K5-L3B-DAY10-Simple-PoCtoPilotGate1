@@ -67,13 +67,13 @@ Sản phẩm và kinh doanh: `config/acceptance_criteria.json`, mục `business`
 
 ### Đóng góp cụ thể
 
-Tham gia xây dựng mục tiêu hệ thống và tiêu chí Product & Business tại Phiếu A câu 1.1 và 1.6; xây dựng Data Map và ví dụ policy drift tại Phiếu B mục B3; đề xuất bốn Business Gates ban đầu tại B7.4 dưới dạng DRAFT. Chuẩn bị specification DRAFT cho S4 tại Phiếu C câu 3.2 và ba dòng C12; chưa có report S4 ba mốc để xác minh hoặc quyết định v2.
+Tham gia xây dựng mục tiêu hệ thống và tiêu chí Product & Business tại Phiếu A câu 1.1 và 1.6; xây dựng Data Map và ví dụ policy drift tại Phiếu B mục B3; đề xuất bốn Business Gates ban đầu tại B7.4 dưới dạng DRAFT. Hải đã review và xác nhận specification C5 — câu 3.2 đạt yêu cầu; C5 đã được đánh dấu hoàn thành trong checklist, nhưng chưa có bằng chứng PASS kiểm thử S4. C12 vẫn BLOCKED do thiếu evidence thực nghiệm S4 và quyết định v2 của nhóm.
 
 Sử dụng Codex hỗ trợ audit repository, phân tích yêu cầu và review tài liệu.
 
 ### Bằng chứng
 
-`8c82874`: bản nháp tiêu chí Product & Business; `a3b5c51`: nội dung Data Map B3; `ca978d1`: Business Gates DRAFT B7.4; `35540f9`: merge PR #1. Commit merge không đồng nghĩa với phê duyệt nghiệp vụ. Xem Phiếu A câu 1.1, 1.6, Phiếu B mục B3, B7.4 và bản DRAFT chưa commit tại Phiếu C C5, C12.
+`8c82874`: bản nháp tiêu chí Product & Business; `a3b5c51`: nội dung Data Map B3; `ca978d1`: Business Gates DRAFT B7.4; `35540f9`: merge PR #1; `039cec7`: chuẩn bị specification S4 và ba dòng C12, đã push lên `origin/Ly`. Commit merge không đồng nghĩa với phê duyệt nghiệp vụ. Xem Phiếu A câu 1.1, 1.6, Phiếu B mục B3, B7.4 và Phiếu C C5, C12.
 
 ### Exit ticket
 
