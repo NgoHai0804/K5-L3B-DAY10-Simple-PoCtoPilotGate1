@@ -241,14 +241,14 @@ python3 -m lab10.grade --incident S4
 
 - [x] Điền bảng thành viên `TEAM.md` (CP1).
 - [x] Câu 1.2 + 1.4 (Phiếu A).
-- [ ] Câu 2.4: **HAZOP vòng 1 (B4) + checklist 9 nhóm (B5)** — **CHƯA điền**.
+- [x] Câu 2.4: **HAZOP vòng 1 (B4) + checklist 9 nhóm (B5)** — bổ sung tiêu chí kiểm tra và giữ trạng thái go-live là `Chưa` khi chưa có bằng chứng đạt.
 - [x] Câu 2.10: `operations` + `legal` trong `operating_gates.json` *(đã điền ở phiên Hải — ĐỨC SOÁT LẠI)*.
 - [x] Runbook 1–3 (B7.5) + Giờ cao điểm (B7.6) *(đã điền ở phiên Hải — ĐỨC SOÁT LẠI)*.
-- [ ] Câu 3.3 giả định môi trường → C5.
-- [ ] Phần riêng S4: mở lại pre-mortem ở C1 + bổ sung **Giờ cao điểm (B7.6)** bằng bút khác màu (S4 miễn ô C3).
-- [ ] Runbook phần 4–5 (C11) + cập nhật checklist 9 nhóm (C11).
-- [ ] Điền `submission/submission.json` + `python -m lab10.check_submission --collect` → `ĐỦ THÀNH PHẦN`.
-- [ ] Viết mục `## TranMinhDuc-2A202603977` trong `TEAM.md`.
+- [x] Câu 3.3 giả định môi trường → C5.
+- [x] Phần riêng S4: mở lại pre-mortem ở C1 + bổ sung **Giờ cao điểm (B7.6)** bằng bút khác màu (S4 miễn ô C3).
+- [x] Runbook phần 4–5 (C11) + cập nhật checklist 9 nhóm (C11); còn chờ chạy lại sau khi nhóm chốt cấu hình.
+- [ ] Điền `submission/submission.json` + `python -m lab10.check_submission --collect` → `ĐỦ THÀNH PHẦN` — đã điền thông tin nhóm/ba dòng và chạy `--collect`, nhưng còn thiếu quyết định v2 của cả bàn, các mục Phiếu C do Hải/Ly và báo cáo integrity hợp lệ.
+- [x] Viết mục `## TranMinhDuc-2A202603977` trong `TEAM.md`.
 
 ### C. LY — Sản phẩm & Kinh doanh
 
@@ -264,7 +264,7 @@ python3 -m lab10.grade --incident S4
 ### D. CẢ NHÓM
 
 - [x] Câu 1.5 → đáp án (b).
-- [ ] Câu 2.5 **pre-mortem 4 lăng kính** (B6).
+- [ ] Câu 2.5 **pre-mortem 4 lăng kính** (B6) — Đức đã thêm dự thảo 4 lăng kính, cả bàn cần xác nhận.
 - [ ] Khối 3: câu 3.1 (tác hại) · 3.4 fault tree **trước** (C6) · 3.5 bảng sửa (C7) · 3.7 fault tree **sau** (C9) + Risk register (C10).
 - [ ] Demo 3 mốc `base · prepared · after` + trả lời phản biện.
 - [ ] Mỗi người tự nộp link repo trên LMS trước deadline.
@@ -273,5 +273,5 @@ python3 -m lab10.grade --incident S4
 
 1. [ ] **Hải**: commit + push phần vòng 1.
 2. [ ] **Hải**: `grade --incident S4` (khi chưa sửa) → mốc prepared.
-3. [ ] **Đức**: điền B4 (HAZOP) + B5 (checklist 9 nhóm) + B6 (pre-mortem).
-4. [ ] **Cả nhóm**: làm Phiếu C cho S4 (Hải trace + Ly 3.2/v2 + Đức 3.3/phần riêng/runbook/C11 + chung 3.4/3.5/3.7).
+3. [x] **Đức**: hoàn thiện B4 (HAZOP) + B5 (checklist 9 nhóm); B6 đã có dự thảo 4 lăng kính, chờ cả bàn xác nhận.
+4. [ ] **Cả nhóm**: hoàn tất Phiếu C cho S4 (Hải: trace/monitor; Ly: 3.2/v2; Đức: 3.3/phần riêng/runbook/C11; chung: 3.4/3.5/3.7). Đức đã điền C1, C5, C11.

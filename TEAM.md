@@ -5,7 +5,7 @@
 - Tên nhóm (`TenNhom`, không dấu, không khoảng trắng): `Simple`
 - Lớp: `L3B`
 - Repo của bàn: `K5-L3B-DAY10-Simple-PoCtoPilotGate1`
-- Thẻ sự cố đã bốc (S1–S8): *(để trống tới phút 125)*
+- Thẻ sự cố đã bốc (S1–S8): `S4`
 
 ## Thành viên
 
@@ -49,15 +49,17 @@ Vận hành và pháp lý: `config/operating_gates.json` (mục `operations`, `l
 
 ### Đóng góp cụ thể
 
-...
+Hoàn thiện HAZOP vòng 1 B4 (ba nhánh kỹ thuật và hai nhánh ngoài kỹ thuật), bổ sung tiêu chí kiểm và PIC cho checklist B5, cùng dự thảo pre-mortem B6 đủ bốn lăng kính để cả bàn xác nhận. Rà soát runbook vận hành/pháp lý B7.5–B7.6; bổ sung C1, giả định môi trường và specification tại C5, checklist C11 và runbook 4–5. Đối chiếu S4 cho thấy 30/41 ticket đến trong một giờ; ở mốc prepared/after còn 5 ca ùn, chờ 82 phút và hoàn tự động 422.000đ so với ngân sách Finance 300.000đ, dù ba chỉ số hoàn sai/lỗi hãng oan/PII đều bằng 0. Không thay đổi cấu hình business do mục này thuộc Ly; cap 300.000đ và phương án thu hẹp vẫn cần Ly/cả bàn chốt.
 
 ### Bằng chứng
 
-Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
+Grade S4: `R-S4-grade-20261119-170730-3f3824`; các mốc `R-S4-before-20261119-170730-3f3824`, `R-S4-prepared-20261119-170730-3f3824`, `R-S4-after-20261119-170730-3f3824`. Kết quả kiểm integrity chưa đạt (`integrity.ok=false`, 19 file khóa lệch `MANIFEST.json`), nên chưa dùng report làm bằng chứng go-live. Xem Phiếu B B4–B7.6 và Phiếu C C1, C5, C11.
 
 ### Exit ticket
 
-Một điều học được, một điều còn chưa chắc.
+**Một điều học được:** Thêm người trực không tự động giải quyết đỉnh tải; cần đo tốc độ ticket đến theo giờ, giới hạn tự động và chi phí/ROI cùng lúc.
+
+**Một điều còn chưa chắc:** Người dự phòng thực tế có thể vào ca trong bao lâu, và ngân sách/ngưỡng Finance nào được áp dụng nhất quán ở từng depot trong pilot thật.
 
 ## LeThiLy-2A202603989
 
