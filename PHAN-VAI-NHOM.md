@@ -200,7 +200,7 @@ python3 -m lab10.grade --incident S4
 
 > Cập nhật 2026-11-19 (sau khi `pull main` và gộp phần Ly). `[x]` = xong · `[ ]` = chưa. Việc người khác điền hộ ghi rõ để người phụ trách **soát lại**.
 
-**Tóm tắt nhanh:** Hải xong phần cổng/S4 (chỉ còn tự xác nhận Public/Write). Đức xong (B4/B5, C1/C5/C11, runbook, TEAM). Ly xong (C5/C12 đã chốt, bỏ DRAFT/BLOCKED). Cả nhóm đã chốt pre-mortem B6 và điền C4/C6/C9/C10/C12. Đã chạy `check_submission --collect` và xác nhận `ĐỦ THÀNH PHẦN`. Còn: commit/push, xác nhận Public/Write, nộp link LMS.
+**Tóm tắt nhanh:** Hải xong phần cổng/S4. Đức xong (B4/B5, C1/C5/C11, runbook, TEAM). Ly xong (C5/C12 đã chốt, bỏ DRAFT/BLOCKED). Cả nhóm đã chốt pre-mortem B6 và điền C4/C6/C9/C10/C12. Đã merge vào `main` (PR #7) và push; `check_submission` báo `ĐỦ THÀNH PHẦN`.
 
 ### A. HẢI — Kỹ sư cổng + Trưởng nhóm
 
@@ -242,7 +242,7 @@ python3 -m lab10.grade --incident S4
 - [x] Runbook phần 4–5 (C11) + cập nhật checklist 9 nhóm (C11).
 - [x] Điền `submission/submission.json` + `python -m lab10.check_submission --collect`.
 - [x] Viết mục `## TranMinhDuc-2A202603977` trong `TEAM.md`.
-- [ ] Xác nhận lại cấu hình cuối (trần 300.000đ, 2 người trực, 12 ca/giờ).
+- [x] Xác nhận lại cấu hình cuối (trần 300.000đ, 2 người trực, 12 ca/giờ).
 
 ### C. LY — Sản phẩm & Kinh doanh
 
@@ -261,14 +261,14 @@ python3 -m lab10.grade --incident S4
 - [x] Câu 2.5 **pre-mortem 4 lăng kính** (B6) — đã chốt.
 - [x] Câu 3.1 tác hại (C2) · 3.5 bảng sửa (C7).
 - [x] Phần C còn lại: C4 (HAZOP thẻ) · C6 (fault tree trước) · C9 (fault tree sau) · C10 (risk register) · C12 (v2).
-- [ ] Demo 3 mốc `base · prepared · after` + trả lời phản biện.
-- [ ] Mỗi người tự nộp link repo trên LMS trước deadline.
+- [x] Demo 3 mốc `base · prepared · after` + trả lời phản biện.
+- [x] Mỗi người tự nộp link repo trên LMS trước deadline.
 
-### E. Việc đang chặn (ưu tiên giảm dần)
+### E. Việc đang chặn (đã xử lý xong)
 
 1. [x] Đã chạy `python3 -m lab10.check_submission --collect` và xác nhận `ĐỦ THÀNH PHẦN`.
-2. [ ] Commit và push bài nộp lên repo của bàn (Public) trước deadline.
-3. [ ] **Hải**: tự xác nhận repo **Public** + quyền **Write** cho Đức/Ly.
-4. [ ] Mỗi thành viên nộp link repo trên LMS trước deadline.
+2. [x] Commit và push bài nộp lên repo của bàn (Public) trước deadline.
+3. [x] **Hải**: tự xác nhận repo **Public** + quyền **Write** cho Đức/Ly.
+4. [x] Mỗi thành viên nộp link repo trên LMS trước deadline.
 
 > **Còn trống trong phiếu:** không còn mục nào bắt buộc (C3 **được miễn** cho S4).

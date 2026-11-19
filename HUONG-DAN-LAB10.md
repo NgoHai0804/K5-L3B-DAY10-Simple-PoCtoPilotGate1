@@ -454,16 +454,16 @@ Gửi **link repo** cho team chấm; **mỗi thành viên** tự nộp link trê
 
 ## 12. Checklist nộp bài (đối chiếu trước khi đóng máy)
 
-- [ ] Repo đúng tên `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`, ở chế độ **Public**.
-- [ ] `TEAM.md` đủ họ tên, MSSV, vai + mục `## HoVaTen-MSSV` của **từng** người.
-- [ ] Tiêu chí đã ký, commit & push **trước** lần đo đầu tiên.
-- [ ] Đã chốt cổng vòng 1 (lệnh 5) trước phút 115.
-- [ ] Ba phiếu A, B, C điền **mọi mục** (A1–A5, B0–B8, C0–C12); dòng `Thẻ đã bốc:` đúng số. (Bàn bốc **S4** không cần điền C3.)
-- [ ] `submission/submission.json` đủ trường; `members` có MSSV khớp `TEAM.md`.
-- [ ] Lệnh 7 in **`ĐỦ THÀNH PHẦN`** trên đúng code/config cuối cùng.
-- [ ] Trên GitHub, `submission/runs/` có `journal.jsonl`, `grade-report.*` và report 3 mốc.
-- [ ] Không commit API key / mật khẩu / `.env`.
-- [ ] **Mỗi thành viên** đã nộp link repo trên LMS trước deadline (GMT+7): lab sáng **23h59 cùng ngày**, lab chiều/tối **11h59 hôm sau**.
+- [x] Repo đúng tên `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`, ở chế độ **Public**.
+- [x] `TEAM.md` đủ họ tên, MSSV, vai + mục `## HoVaTen-MSSV` của **từng** người.
+- [x] Tiêu chí đã ký, commit & push **trước** lần đo đầu tiên.
+- [x] Đã chốt cổng vòng 1 (lệnh 5) trước phút 115.
+- [x] Ba phiếu A, B, C điền **mọi mục** (A1–A5, B0–B8, C0–C12); dòng `Thẻ đã bốc:` đúng số. (Bàn bốc **S4** không cần điền C3.)
+- [x] `submission/submission.json` đủ trường; `members` có MSSV khớp `TEAM.md`.
+- [x] Lệnh 7 in **`ĐỦ THÀNH PHẦN`** trên đúng code/config cuối cùng.
+- [x] Trên GitHub, `submission/runs/` có `journal.jsonl`, `grade-report.*` và report 3 mốc.
+- [x] Không commit API key / mật khẩu / `.env`.
+- [x] **Mỗi thành viên** đã nộp link repo trên LMS trước deadline (GMT+7): lab sáng **23h59 cùng ngày**, lab chiều/tối **11h59 hôm sau**.
 
 ---
 
