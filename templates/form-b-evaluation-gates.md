@@ -120,24 +120,26 @@ Gợi ý: mở `data/world.json` phần `policies`, `orders[].parcels`, `ops_lim
 
 | Mục | Điền cho trợ lý hoàn tiền |
 |---|---|
-| Người dùng | |
-| Việc người dùng cần làm xong | |
-| Đầu ra của hệ thống (kể cả các lệnh ghi) | |
-| Dữ liệu trợ lý đọc lúc chạy (bảng nào trong `data/world.json`) | |
-| Trường then chốt quyết định tiền và lỗi hãng | |
-| Với mỗi trường then chốt: **nguồn sự thật** hay **bản sao** (ai cập nhật, khi nào)? | |
-| Định dạng cần để ý (ngày, trường được phép trống, đơn nhiều kiện) | |
-| Thế giới thật làm dữ liệu lệch ở đâu (theo mùa, đổi chính sách, giờ cao điểm, người nhập tay)? | |
-| Câu người ngoài sẽ hỏi về nguồn dữ liệu ("sao hệ thống biết đơn trễ mấy ngày?") | |
+| Người dùng | Khách gửi yêu cầu hoàn tiền; nhân viên CSKH và người duyệt xử lý ca chuyển người; kế toán đối soát. Hãng vận chuyển và shop là các bên chịu ảnh hưởng. |
+| Việc người dùng cần làm xong | Khách cần yêu cầu được xử lý và trả lời; người duyệt cần nhận ca cần can thiệp; kế toán cần đối soát tiền hoàn và trách nhiệm hãng/shop. |
+| Đầu ra của hệ thống (kể cả các lệnh ghi) | Trạng thái xử lý hoặc chuyển người; ghi hoàn tiền vào sổ cái (`issue_refund`), ghi lỗi hãng (`file_carrier_fault`), thông báo hãng (`notify_carrier`) và trả lời khách (`send_reply`). |
+| Dữ liệu trợ lý đọc lúc chạy (bảng nào trong `data/world.json`) | Ticket từ `data/tickets.jsonl`; trong world mock: `orders` và `parcels`, `policies`, `approvals`, sổ cái khởi tạo `ledger_seed`, `ops_facts` và dữ liệu vận hành. Cổng dùng `config/operating_gates.json`. |
+| Trường then chốt quyết định tiền và lỗi hãng | Tiền: `shipping_fee_vnd`, `goods_value_vnd`, `promised_date`, `delivered_date`, `as_of`, `delay_cause`, `policies[].late`, `no_refund_causes`, `auto_limit_vnd`, phê duyệt và `refund_status`. Lỗi hãng: `parcel_id`, `carrier_id`, ngày hẹn/giao, `delay_cause`, `fault_causes` và ngưỡng trễ. |
+| Với mỗi trường then chốt: **nguồn sự thật** hay **bản sao** (ai cập nhật, khi nào)? | Trong lab, `orders/parcels` là dữ liệu tra cứu đơn/tracking; `policies` là bảng policy mock, còn `index_active` là cờ chỉ mục agent mặc định dùng để chọn; `approvals` và `ledger_seed` là trạng thái mock được nạp. Text ticket là lời khách khai, không phải tracking. `refund_status` là cờ cập nhật theo lô hằng đêm theo code, có thể cũ hơn sổ cái. Công cụ đọc trả bản sao trong bộ nhớ. Nguồn production, người cập nhật và tần suất đồng bộ **chưa biết, cần xác nhận**; không coi mock là nguồn production. |
+| Định dạng cần để ý (ngày, trường được phép trống, đơn nhiều kiện) | Ngày `YYYY-MM-DD`; `delivered_date` có thể `null`, helper dùng `as_of` thay thế; `delay_cause` có thể thiếu; `effective_to` có thể `null`; tiền là số nguyên VND. Một đơn có thể có nhiều kiện với mã, hãng, ngày và nguyên nhân riêng. |
+| Thế giới thật làm dữ liệu lệch ở đâu (theo mùa, đổi chính sách, giờ cao điểm, người nhập tay)? | **Giả thuyết cần xác minh:** tracking cập nhật muộn hoặc nhập sai; cờ hoàn tiền theo lô bị cũ; chỉ mục policy không đồng bộ ngày hiệu lực; thiếu nguyên nhân trễ; giờ cao điểm làm tải và thời gian duyệt thay đổi. |
+| Câu người ngoài sẽ hỏi về nguồn dữ liệu ("sao hệ thống biết đơn trễ mấy ngày?") | Hệ thống dựa vào ngày giao và phiên bản chính sách nào để tính số tiền, và vì sao quy trách nhiệm cho hãng đó? |
 
 **Tóm lại (điền vào chỗ trống):**
-Trợ lý dùng `__________`, `__________`, `__________` để giúp `__________` làm được `__________`.
-Trường mà nếu sai thì tiền hoặc lỗi hãng sai theo: `__________`, `__________`.
-Chúng tôi biết thế giới thật sẽ làm dữ liệu lệch ở: `__________`. Dấu hiệu nhìn thấy sớm nhất: `__________`.
+Trợ lý dùng `ticket của khách`, `đơn hàng và tracking theo kiện`, `chính sách và phê duyệt trong world mock` để giúp `khách và nhân viên LogiX` làm được `xử lý yêu cầu hoàn tiền do giao trễ`.
+Trường mà nếu sai thì tiền hoặc lỗi hãng sai theo: `ngày hẹn, ngày giao và nguyên nhân trễ`, `phiên bản và điều kiện chính sách`.
+Chúng tôi biết thế giới thật sẽ làm dữ liệu lệch ở: `giả thuyết tracking hoặc chỉ mục chính sách cập nhật chậm, cần xác minh`. Dấu hiệu nhìn thấy sớm nhất: `policy được dùng không khớp policy có hiệu lực theo ngày xử lý, nếu dữ liệu giám sát đầy đủ`.
 
-**Ví dụ drift trong 3 tháng tới** (lấy từ dòng "thế giới thật làm dữ liệu lệch"): cái gì đổi `____` · đổi ngày nào `____` ·
-trường nào cho thấy `____` · con số nào của Bản tiêu chí bị ảnh hưởng `____`.
-Đây là đầu vào đổi hay quan hệ vào–ra đổi? Chỉ số nào sẽ phát hiện? `__________`
+**Ví dụ drift trong 3 tháng tới** (lấy từ dòng "thế giới thật làm dữ liệu lệch"): cái gì đổi `policy mock REFUND-v3 sang REFUND-v4` · đổi ngày nào `01/12/2026, trong ba tháng tính từ as_of mock 16/11/2026` ·
+trường nào cho thấy `effective_from, effective_to, index_active, auto_limit_vnd, fault_causes và late` · con số nào của Bản tiêu chí bị ảnh hưởng `có thể ảnh hưởng wrongful_refund_vnd, wrongful_carrier_faults, pass_rate, pass_k; gián tiếp queue_stuck, cost_per_ticket_vnd, roi`.
+Đây là đầu vào đổi hay quan hệ vào–ra đổi? Chỉ số nào sẽ phát hiện? `Quan hệ vào–ra đổi do chính sách: cùng đầu vào có thể dẫn đến tiền hoàn, duyệt hoặc lỗi hãng khác. Metric đề xuất: tỷ lệ lượt dùng policy không khớp khoảng hiệu lực; tử số là lượt có policy_id khác policy hiệu lực theo ngày xử lý; mẫu số là lượt có đủ policy_id, ngày và dữ liệu hiệu lực. Đếm riêng lượt thiếu dữ liệu, không tìm được policy hoặc policy chồng hiệu lực; không coi là an toàn. Giới hạn: chỉ thấy lệch phiên bản so với lịch được cung cấp, không chứng minh lịch đúng hay phát hiện mọi sai lệch tracking; cần xác nhận nguồn ngày xử lý và lịch hiệu lực trong giám sát.`
+
+Trong mock, v4 giảm `auto_limit_vnd` từ 200.000 xuống 100.000 đồng, bỏ `FORCE_MAJEURE` khỏi `fault_causes` và đổi ngưỡng ngày trễ. **Suy luận từ code:** agent mặc định dùng `index_active` thay vì tự chọn theo khoảng hiệu lực; nếu cờ không cập nhật và không ghim đúng policy, agent có thể dùng v3 sau ngày đổi. Điều này có thể làm sai tiền hoàn hoặc ghi oan hãng và tăng nhu cầu duyệt khi dùng đúng hạn mức mới. Đây là giả thuyết rủi ro, **chưa có bằng chứng thực nghiệm**; metric trên cũng chưa được đăng ký hay đo.
 
 **Ví dụ một dòng (đừng chép):** trường then chốt `parcels[].delivered_date` · bản ghi do máy quét ở điểm phát tạo ra, là nguồn
 sự thật về ngày giao · lệch khi điểm phát quét sót hoặc nhập bù bằng tay.

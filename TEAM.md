@@ -27,7 +27,7 @@ Mỗi thành viên tự viết một mục bên dưới (chép mẫu, đổi ti�
 
 ### Phần việc phụ trách
 
-Kỹ sư cổng: `lab10/guards.py`, `lab10/monitors.py`; chạy các lệnh `lab10.eval`, `lab10.trace`, `lab10.gate`, `lab10.checkpoint`. Câu 1.3, 2.1, 2.2, 2.6–2.8, 3.1 (trace), 3.6. Trưởng nhóm, phụ trách repo.
+Kỹ sư cổng: `lab10/guards.py`, `lab10/monitors.py`; chạy các lệnh `lab10.eval`, `lab10.trace`, `lab10.gate`, `lab10.checkpoint`. Câu 1.3, 2.1, 2.2, 2.6–2.8, 3.1 (trace), 3.6. Trưởng nhóm, phụ trách repo. 
 
 ### Đóng góp cụ thể
 
@@ -41,7 +41,17 @@ Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
 
 Một điều học được, một điều còn chưa chắc.
 
-## TranMinhDuc-2A202603977
+### LeThiLy-2A202603989
+### Phần việc phụ trách
+config/acceptance_criteria.json, mục business trong config/operating_gates.json; phụ trách nội dung Product & Business trong templates/form-a-criteria.md, templates/form-b-evaluation-gates.md, templates/form-c-incident.md. Câu 1.1, 1.6, 2.3, 2.9, 3.2; chủ trì tổng hợp quyết định Gate 1 v1 (B8) và v2 (C12). Phối hợp các câu chung 1.5, 2.5 và phân tích sự cố. Phụ trách đề xuất tiêu chí nghiệm thu, đánh giá hiệu quả kinh doanh, phạm vi pilot, ROI và điều kiện tiếp tục/dừng. Cập nhật đóng góp cá nhân trong TEAM.md. 
+### Đóng góp cụ thể
+
+...
+
+### Bằng chứng
+
+Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
+## TranMinhDuc-2A202603977:
 
 ### Phần việc phụ trách
 
