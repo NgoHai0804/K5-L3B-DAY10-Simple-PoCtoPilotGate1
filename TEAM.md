@@ -31,11 +31,11 @@ Kỹ sư cổng: `lab10/guards.py`, `lab10/monitors.py`; chạy các lệnh `lab
 
 ### Đóng góp cụ thể
 
-Kỹ sư cổng + trưởng nhóm: dựng repo (fork/Public/collaborators), sửa danh tính Git về MSSV; câu 1.3 (offline metric `model_override`); chạy base + soát `T-002@55`; viết 3 cổng trong `guards.py` (hoàn theo tracking DB, chặn lỗi hãng oan, bỏ PII) — base: hoàn sai 20.000đ→0, lỗi hãng oan 1→0; chốt cổng vòng 1 (`12398971`) + quyết định v1; thẻ S4: trace `S4-07/S4-08`, thêm monitor `fail_open_rate`/`queue_stuck_rate`, chỉnh config S4 (trần hoàn 300k, 2 người trực/12 ca-giờ); viết `PHAN-VAI-NHOM.md`.
+Kỹ sư cổng + trưởng nhóm: dựng repo (fork/Public/collaborators), sửa danh tính Git về MSSV; câu 1.3 (offline metric `model_override`); chạy base + soát `T-002@55`; viết 3 cổng trong `guards.py` (hoàn theo tracking DB, chặn lỗi hãng oan, bỏ PII) — base: hoàn sai 20.000đ→0, lỗi hãng oan 1→0; chốt cổng vòng 1 (`12398971`) + quyết định v1; thẻ S4: trace `S4-07/S4-08`, thêm monitor `fail_open_rate`/`queue_stuck_rate`, chỉnh config S4 (trần hoàn 300.000đ, 2 người trực, 12 ca/giờ); `grade --incident S4` → **PASS-VISIBLE** (`R-S4-grade-20261119-165027-eee280`); viết `PHAN-VAI-NHOM.md`.
 
 ### Bằng chứng
 
-Mã commit: `1846da4` (chốt vòng 1 + v1), `b9d5ff5` (thẻ S4). Mã run: base `R-base-before-20261119-153723-b45eeb`, after `R-base-after-20261119-165011-eee280`, prepared `R-base-prepared-20261119-161030-535bf6`; S4 prepared `R-S4-prepared-20261119-165028-eee280`, after `R-S4-after-20261119-164955-eee280`, grade `R-S4-grade-20261119-165027-eee280`. Phiếu: A (1.3); B (B0/B1/B2/B7.1–B7.3); C (C0/C1/C2/C7/C8).
+Mã commit: `1846da4` (chốt vòng 1 + v1), `b9d5ff5` (thẻ S4). Mã run: base `R-base-before-20261119-153723-b45eeb`, after `R-base-after-20261119-165011-eee280`, prepared `R-base-prepared-20261119-161030-535bf6`; S4 base `R-S4-before-20261119-165028-eee280`, prepared `R-S4-prepared-20261119-165028-eee280`, after `R-S4-after-20261119-165028-eee280`, grade `R-S4-grade-20261119-165027-eee280` (PASS-VISIBLE). Phiếu: A (1.3); B (B0/B1/B2/B7.1–B7.3); C (C0/C1/C2/C7/C8).
 
 ### Exit ticket
 
@@ -49,11 +49,11 @@ Vận hành và pháp lý: `config/operating_gates.json` (mục `operations`, `l
 
 ### Đóng góp cụ thể
 
-Hoàn thiện HAZOP vòng 1 B4 (ba nhánh kỹ thuật và hai nhánh ngoài kỹ thuật), bổ sung tiêu chí kiểm và PIC cho checklist B5, cùng dự thảo pre-mortem B6 đủ bốn lăng kính để cả bàn xác nhận. Rà soát runbook vận hành/pháp lý B7.5–B7.6; bổ sung C1, giả định môi trường và specification tại C5, checklist C11 và runbook 4–5. Đối chiếu S4 cho thấy 30/41 ticket đến trong một giờ; ở mốc prepared/after còn 5 ca ùn, chờ 82 phút và hoàn tự động 422.000đ so với ngân sách Finance 300.000đ, dù ba chỉ số hoàn sai/lỗi hãng oan/PII đều bằng 0. Không thay đổi cấu hình business do mục này thuộc Ly; cap 300.000đ và phương án thu hẹp vẫn cần Ly/cả bàn chốt.
+Hoàn thiện HAZOP vòng 1 B4 (ba nhánh kỹ thuật và hai nhánh ngoài kỹ thuật), bổ sung tiêu chí kiểm và PIC cho checklist B5, cùng pre-mortem B6 đủ bốn lăng kính (đã chốt). Rà soát runbook vận hành/pháp lý B7.5–B7.6; bổ sung C1, giả định môi trường và specification tại C5, checklist C11 và runbook 4–5. Đối chiếu S4: 30/41 ticket đến trong một giờ; sau khi sửa cấu hình (trần 300.000đ, 2 người trực, 12 ca/giờ) mốc after còn 0 ca ùn, chờ 15 phút, hoàn tự động 292.000đ ≤ 300.000đ, hoàn sai/lỗi hãng oan/PII đều 0 (mốc prepared trước đó: 5 ca ùn, chờ 82 phút, hoàn tự động 422.000đ > 300.000đ).
 
 ### Bằng chứng
 
-Grade S4: `R-S4-grade-20261119-170730-3f3824`; các mốc `R-S4-before-20261119-170730-3f3824`, `R-S4-prepared-20261119-170730-3f3824`, `R-S4-after-20261119-170730-3f3824`. Kết quả kiểm integrity chưa đạt (`integrity.ok=false`, 19 file khóa lệch `MANIFEST.json`), nên chưa dùng report làm bằng chứng go-live. Xem Phiếu B B4–B7.6 và Phiếu C C1, C5, C11.
+Grade S4: `R-S4-grade-20261119-165027-eee280`; các mốc `R-S4-before-20261119-165028-eee280`, `R-S4-prepared-20261119-165028-eee280`, `R-S4-after-20261119-165028-eee280`. Kết quả kiểm integrity đạt (`integrity.ok = true`); cả 6 mục kiểm (integrity/criteria/visible/regression/monitor) đều ✅; verdict **PASS-VISIBLE**; `ceilings.violations = []`; `continue_allowed = true`. Xem Phiếu B B4–B7.6 và Phiếu C C1, C5, C11.
 
 ### Exit ticket
 
@@ -69,16 +69,16 @@ Sản phẩm và kinh doanh: `config/acceptance_criteria.json`, mục `business`
 
 ### Đóng góp cụ thể
 
-Tham gia xây dựng mục tiêu hệ thống và tiêu chí Product & Business tại Phiếu A câu 1.1 và 1.6; xây dựng Data Map và ví dụ policy drift tại Phiếu B mục B3; đề xuất bốn Business Gates ban đầu tại B7.4 dưới dạng DRAFT. Chuẩn bị specification DRAFT cho S4 tại Phiếu C câu 3.2 và ba dòng C12; chưa có report S4 ba mốc để xác minh hoặc quyết định v2.
+Tham gia xây dựng mục tiêu hệ thống và tiêu chí Product & Business tại Phiếu A câu 1.1 và 1.6; xây dựng Data Map và ví dụ policy drift tại Phiếu B mục B3; chốt bốn Business Gates tại B7.4. Hoàn thiện specification cho S4 tại Phiếu C câu 3.2 và quyết định v2 (C12) = **Tiếp tục** kèm 3 dòng, dựa trên report S4 (after: 0 ca ùn, chờ 15 phút, hoàn tự động 292.000đ ≤ 300.000đ).
 
 Sử dụng Codex hỗ trợ audit repository, phân tích yêu cầu và review tài liệu.
 
 ### Bằng chứng
 
-`8c82874`: bản nháp tiêu chí Product & Business; `a3b5c51`: nội dung Data Map B3; `ca978d1`: Business Gates DRAFT B7.4; `35540f9`: merge PR #1. Commit merge không đồng nghĩa với phê duyệt nghiệp vụ. Xem Phiếu A câu 1.1, 1.6, Phiếu B mục B3, B7.4 và bản DRAFT chưa commit tại Phiếu C C5, C12.
+`8c82874`: bản nháp tiêu chí Product & Business; `a3b5c51`: nội dung Data Map B3; `ca978d1`: Business Gates B7.4; `35540f9`: merge PR #1. Ký tiêu chí: `hash 523ab187`, commit `2e78acd`. Xem Phiếu A câu 1.1, 1.6; Phiếu B mục B3, B7.4; Phiếu C C5, C12 (v2 = Tiếp tục).
 
 ### Exit ticket
 
 **Một điều học được:** Tiêu chí chấp nhận cần được ký trước khi đánh giá. Quyết định Gate 1 phải dựa trên bằng chứng thực nghiệm, đồng thời cân nhắc chất lượng, an toàn, chi phí và khả năng vận hành.
 
-**Một điều còn chưa chắc:** Cách áp dụng điều kiện “Tiếp tục” đã ký cho Gate 1 v1 khi nhóm chưa được giao gói sự cố.
+**Một điều còn chưa chắc:** Ngưỡng/ngân sách Finance (trần hoàn/ngày) nào áp dụng nhất quán ở từng depot trong pilot thật, và cách giữ ROI/độ phủ ổn định khi lưu lượng ticket tăng.
