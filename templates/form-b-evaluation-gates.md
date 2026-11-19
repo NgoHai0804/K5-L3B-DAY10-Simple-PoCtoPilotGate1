@@ -310,10 +310,10 @@ Mỗi con số kèm một câu lý do, lấy từ `data/world.json` → `ops_lim
 
 | Khoá | Giá trị bàn đặt | Lý do (một câu, có số) |
 |---|---|---|
-| `business.daily_refund_cap_vnd` | | |
-| `business.cost_budget_per_ticket_vnd` | | |
-| `business.pilot_scope` (all / warehouse / percent) | | |
-| `business.roi_min` | | |
+| `business.daily_refund_cap_vnd` | **DRAFT: 1500000** | Chưa được nhóm phê duyệt: mức 1.500.000 đồng/ngày bằng 75% ngân sách hoàn tự động mock 2.000.000 đồng/ngày; đặt quá thấp có thể tăng ca chuyển duyệt và gây ùn, đặt quá cao làm giảm phần đệm ngân sách. |
+| `business.cost_budget_per_ticket_vnd` | **DRAFT: 1200** | Chưa được nhóm phê duyệt: mức 1.200 đồng/ticket thấp hơn trần chi phí LLM mock 1.500 đồng 300 đồng; quá thấp có thể tăng ca chuyển người, quá cao làm giảm phần đệm; code chỉ kiểm ngân sách tại một số bước đọc nên không bảo đảm tổng chi phí cuối ticket không vượt 1.500 đồng. |
+| `business.pilot_scope` (all / warehouse / percent) | **DRAFT: `{"mode":"warehouse","warehouses":["HN","HCM"],"percent":100}`** | Chưa được nhóm phê duyệt: đề nêu pilot tại 2 depot và mock có HN/HCM, nhưng nhóm cần xác nhận lựa chọn; phạm vi hẹp có thể thiếu đại diện, phạm vi rộng tăng tải; lọc kho không tuyệt đối vì ticket không tìm thấy đơn vẫn được đưa vào phạm vi, còn `percent: 100` không lọc thêm trong mode `warehouse`. |
+| `business.roi_min` | **DRAFT: 0.30** | Chưa được nhóm phê duyệt như cổng vận hành: mức 0,30 khớp ngưỡng ROI tối thiểu đã ký; đặt cao hơn thêm ràng buộc, đặt thấp hơn không hạ ngưỡng đã ký; đây là ngưỡng báo cáo, không tự chặn giao dịch. |
 
 ### B7.5 · Câu 2.10 · Cổng con người, vận hành, pháp lý + Runbook phần 1–3
 
