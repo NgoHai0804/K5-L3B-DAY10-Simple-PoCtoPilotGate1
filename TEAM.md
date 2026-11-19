@@ -31,15 +31,15 @@ Kỹ sư cổng: `lab10/guards.py`, `lab10/monitors.py`; chạy các lệnh `lab
 
 ### Đóng góp cụ thể
 
-...
+Kỹ sư cổng + trưởng nhóm: dựng repo (fork/Public/collaborators), sửa danh tính Git về MSSV; câu 1.3 (offline metric `model_override`); chạy base + soát `T-002@55`; viết 3 cổng trong `guards.py` (hoàn theo tracking DB, chặn lỗi hãng oan, bỏ PII) — base: hoàn sai 20.000đ→0, lỗi hãng oan 1→0; chốt cổng vòng 1 (`12398971`) + quyết định v1; thẻ S4: trace `S4-07/S4-08`, thêm monitor `fail_open_rate`/`queue_stuck_rate`, chỉnh config S4 (trần hoàn 300k, 2 người trực/12 ca-giờ); viết `PHAN-VAI-NHOM.md`.
 
 ### Bằng chứng
 
-Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
+Mã commit: `1846da4` (chốt vòng 1 + v1), `b9d5ff5` (thẻ S4). Mã run: base `R-base-before-20261119-153723-b45eeb`, after `R-base-after-20261119-165011-eee280`, prepared `R-base-prepared-20261119-161030-535bf6`; S4 prepared `R-S4-prepared-20261119-165028-eee280`, after `R-S4-after-20261119-164955-eee280`, grade `R-S4-grade-20261119-165027-eee280`. Phiếu: A (1.3); B (B0/B1/B2/B7.1–B7.3); C (C0/C1/C2/C7/C8).
 
 ### Exit ticket
 
-Một điều học được, một điều còn chưa chắc.
+Điều học được: cổng phải dựa trên **nguồn sự thật (tracking DB)**, không tin số khách khai — vá đúng chỗ rẻ hơn nhiều so với tin model. Điều chưa chắc: khi LLM nghẽn nên chặn hẳn (escalate) `fail_open` hay chỉ cần đối chiếu DB như hiện tại; tôi chọn đối chiếu DB để giữ tính hữu dụng, nhưng chưa đo trên bài kiểm tra ẩn.
 
 ## TranMinhDuc-2A202603977
 
@@ -69,13 +69,13 @@ Sản phẩm và kinh doanh: `config/acceptance_criteria.json`, mục `business`
 
 ### Đóng góp cụ thể
 
-Tham gia xây dựng mục tiêu hệ thống và tiêu chí Product & Business tại Phiếu A câu 1.1 và 1.6; xây dựng Data Map và ví dụ policy drift tại Phiếu B mục B3; đề xuất bốn Business Gates tại B7.4. Các Business Gates vẫn là DRAFT, chưa được nhóm phê duyệt.
+Tham gia xây dựng mục tiêu hệ thống và tiêu chí Product & Business tại Phiếu A câu 1.1 và 1.6; xây dựng Data Map và ví dụ policy drift tại Phiếu B mục B3; đề xuất bốn Business Gates ban đầu tại B7.4 dưới dạng DRAFT. Chuẩn bị specification DRAFT cho S4 tại Phiếu C câu 3.2 và ba dòng C12; chưa có report S4 ba mốc để xác minh hoặc quyết định v2.
 
 Sử dụng Codex hỗ trợ audit repository, phân tích yêu cầu và review tài liệu.
 
 ### Bằng chứng
 
-`8c82874`: bản nháp tiêu chí Product & Business; `a3b5c51`: nội dung Data Map B3; `ca978d1`: Business Gates DRAFT B7.4; `35540f9`: merge PR #1. Commit merge không đồng nghĩa với phê duyệt nghiệp vụ. Xem Phiếu A câu 1.1, 1.6 và Phiếu B mục B3, B7.4.
+`8c82874`: bản nháp tiêu chí Product & Business; `a3b5c51`: nội dung Data Map B3; `ca978d1`: Business Gates DRAFT B7.4; `35540f9`: merge PR #1. Commit merge không đồng nghĩa với phê duyệt nghiệp vụ. Xem Phiếu A câu 1.1, 1.6, Phiếu B mục B3, B7.4 và bản DRAFT chưa commit tại Phiếu C C5, C12.
 
 ### Exit ticket
 
