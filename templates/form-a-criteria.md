@@ -24,8 +24,8 @@ rồi mới chạy đánh giá. Khối 1 không sửa code.
 
 ### Câu 1.2 · Mục tiêu nhìn từ hai người
 
-- Chị Oanh, kế toán đối soát (không dùng trợ lý, nhưng phải khớp sổ với hãng và shop mỗi tuần): …
-- Chị Hạnh, trưởng ca CSKH (phải duyệt những ca trợ lý chuyển sang): …
+- Chị Oanh, kế toán đối soát (không dùng trợ lý, nhưng phải khớp sổ với hãng và shop mỗi tuần): Mỗi tuần, chị Oanh có thể đối chiếu các khoản hoàn tiền và ghi nhận lỗi hãng với sổ cái, hãng vận chuyển và shop; mỗi khoản có đủ thông tin truy nguyên để xác định đúng số tiền, bên chịu trách nhiệm và giao dịch liên quan.
+- Chị Hạnh, trưởng ca CSKH (phải duyệt những ca trợ lý chuyển sang): Chị Hạnh nhận được các ca trợ lý chuyển lên trong thời hạn vận hành, có đủ căn cứ và phần giải thích để duyệt nhất quán các ca vượt hạn mức hoặc chưa rõ; khối lượng ca chuyển không vượt khả năng xử lý của ca trực.
 
 ---
 
@@ -48,12 +48,12 @@ trợ lý có đang gây thiệt hại cho bên ngoài LogiX không; không có 
 
 | | Offline, cho MỘT bước (câu 1.3) | Telemetry production (câu 1.4) |
 |---|---|---|
-| **Bước / hành vi được đo** | | |
-| **Thước đo** (một câu, có đơn vị) | | |
-| **Dữ liệu** (lấy ở đâu, bao nhiêu, ai gán nhãn) | | |
-| **Cách tính** (công thức, mẫu số, cách xử lý ca thiếu dữ liệu) | | |
-| **Khung thời gian / ngưỡng báo động** | (không áp dụng) | |
-| **Điểm mù** (thước đo này KHÔNG thấy gì) | | |
+| **Bước / hành vi được đo** | | Gửi thông báo từ LogiX cho hãng vận chuyển (`notify_carrier`). |
+| **Thước đo** (một câu, có đơn vị) | | Số và tỷ lệ thông báo gửi cho hãng có chứa thông tin cá nhân của người nhận (tên, số điện thoại hoặc địa chỉ), tính theo thông báo/24 giờ và phần trăm. |
+| **Dữ liệu** (lấy ở đâu, bao nhiêu, ai gán nhãn) | | Log thông báo gửi ra ngoài (mã giao dịch và payload) đối chiếu với các trường người nhận trong hồ sơ đơn hàng. Đây là tín hiệu quy tắc, không cần nhãn đúng/sai; chỉ ghi bộ đếm, mã tham chiếu và trạng thái cảnh báo, không ghi giá trị PII vào log giám sát. |
+| **Cách tính** (công thức, mẫu số, cách xử lý ca thiếu dữ liệu) | | Tỷ lệ = số thông báo có ít nhất một trường PII khớp ÷ tổng thông báo gửi cho hãng × 100%. Nếu thiếu payload hoặc không đối chiếu được hồ sơ người nhận, đánh dấu “không xác minh được” và phát cảnh báo, không coi là an toàn. |
+| **Khung thời gian / ngưỡng báo động** | (không áp dụng) | Cửa sổ trượt 24 giờ; báo động ngay khi phát hiện từ 1 thông báo trở lên có PII hoặc có thông báo không xác minh được. PIC báo người trực và tạm dừng gửi thông báo cho hãng để kiểm tra. |
+| **Điểm mù** (thước đo này KHÔNG thấy gì) | | Có thể bỏ sót PII được diễn đạt khác, thông tin nhạy cảm ngoài các trường đối chiếu hoặc dữ liệu gửi qua kênh khác; đối chiếu tự động cũng có thể báo nhầm. Cần điều tra sự cố, không xem telemetry là kết luận pháp lý. |
 
 **Ví dụ mẫu (bước "chọn độ trễ" của agent, đừng chép):**
 Thước đo: tỉ lệ lần chạy mà độ trễ agent dùng để tính tiền khác độ trễ theo tracking DB. Dữ liệu: sự kiện `proposal.delay_days_used`
