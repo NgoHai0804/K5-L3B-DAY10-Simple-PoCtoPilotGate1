@@ -1,9 +1,9 @@
 {
-  "run_id": "R-S4-after-20261119-170730-3f3824",
-  "note": "lab10.grade S4: mốc after (sau khi sửa)",
-  "code_hash": "3f3824a01294a173178977e279a5b91809a58ab6d8aa9873e76e4a5bf1cc88c7",
+  "run_id": "R-S4-prepared-20261119-165028-eee280",
+  "note": "lab10.grade S4: mốc prepared (cổng vòng 1)",
+  "code_hash": "eee280e4c6f2837ecc89891a655722e5b7c980b269558459da91ad5c33bae383",
   "suite": "S4",
-  "stage": "after",
+  "stage": "prepared",
   "trials": 205,
   "tickets": 41,
   "pass_rate": 1.0,
@@ -103,7 +103,9 @@
     ]
   },
   "monitors": {
-    "escalation_rate": 0.365854
+    "escalation_rate": 0.365854,
+    "fail_open_rate": 0.185366,
+    "queue_stuck_rate": 0.121951
   },
   "by_segment": {
     "warehouse": [
