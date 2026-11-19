@@ -67,12 +67,16 @@ Sản phẩm và kinh doanh: `config/acceptance_criteria.json`, mục `business`
 
 ### Đóng góp cụ thể
 
-...
+Tham gia xây dựng mục tiêu hệ thống và tiêu chí Product & Business tại Phiếu A câu 1.1 và 1.6; xây dựng Data Map và ví dụ policy drift tại Phiếu B mục B3; đề xuất bốn Business Gates tại B7.4. Các Business Gates vẫn là DRAFT, chưa được nhóm phê duyệt.
+
+Sử dụng Codex hỗ trợ audit repository, phân tích yêu cầu và review tài liệu.
 
 ### Bằng chứng
 
-Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
+`8c82874`: bản nháp tiêu chí Product & Business; `a3b5c51`: nội dung Data Map B3; `ca978d1`: Business Gates DRAFT B7.4; `35540f9`: merge PR #1. Commit merge không đồng nghĩa với phê duyệt nghiệp vụ. Xem Phiếu A câu 1.1, 1.6 và Phiếu B mục B3, B7.4.
 
 ### Exit ticket
 
-Một điều học được, một điều còn chưa chắc.
+**Một điều học được:** Tiêu chí chấp nhận cần được ký trước khi đánh giá. Quyết định Gate 1 phải dựa trên bằng chứng thực nghiệm, đồng thời cân nhắc chất lượng, an toàn, chi phí và khả năng vận hành.
+
+**Một điều còn chưa chắc:** Cách áp dụng điều kiện “Tiếp tục” đã ký cho Gate 1 v1 khi nhóm chưa được giao gói sự cố.
