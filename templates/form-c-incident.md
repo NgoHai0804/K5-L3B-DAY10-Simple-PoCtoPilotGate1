@@ -249,9 +249,14 @@ Bắt buộc: ít nhất ba dòng, trong đó **một dòng là nhánh bàn chư
 
 ### Câu 3.2 · Một specification mà nếu bị vi phạm thì gây ra tác hại trên thẻ
 
-Kiểm được bằng code hoặc bằng một con số trong report: …
+Kiểm được bằng code hoặc bằng một con số trong report: **DRAFT — đề xuất của Ly, chưa được nhóm duyệt hoặc kiểm thử trên S4.**
 
-Kiểm bằng gì (hàm trong `guards.py`, dòng report nào): …
+1. **LLM lỗi / fail-open:** Khi kiểm tra policy thất bại và `proposal.basis == "fail_open"`, không được tự động ghi hoàn hoặc ghi lỗi hãng dựa trên đề xuất fail-open; chuyển người trước thao tác ghi. **Invariant:** số lệnh ghi tự động dựa trên đề xuất fail-open bằng 0. **Kiểm chứng:** đối chiếu event `llm_fallback`, `proposal.basis`, verdict và sổ cái/lỗi hãng theo từng trial; nguồn kiểm là trace/report S4 và `lab10/guards.py`. **Trạng thái: BLOCKED** — chưa có trace/report S4 trong workspace, chưa xác nhận cổng đáp ứng.
+2. **Trần hoàn tự động ngày sale:** Khi khoản hoàn tự động kế tiếp làm tổng ngày vượt ngân sách Finance có hiệu lực, không ghi khoản đó tự động và chuyển người duyệt. **Invariant:** tổng các dòng hoàn tự động không có `approval_id` trong mỗi ngày mô phỏng không vượt `ops_limits.daily_auto_refund_budget_vnd` (mock S4: 300.000đ). **Kiểm chứng:** đối chiếu từng dòng ledger theo ngày/seed và `ops.refund.auto_refund_day_max_vnd` với ngân sách trong report S4. **Trạng thái: BLOCKED** — chưa có report ba mốc; config vòng 1 là 500.000đ, cao hơn mức 300.000đ trên world patch S4.
+3. **An toàn khi tải tăng:** Khi tải tăng hoặc LLM nghẽn, không được có hoàn sai hoặc ghi oan hãng; không dùng tỷ lệ tự động hóa cao để thay thế kiểm tra an toàn. **Metric:** `wrongful_refund_vnd = 0` và `wrongful_carrier_faults = 0` theo tiêu chí đã ký, đọc cùng tỷ lệ chuyển người và độ phủ. **Kiểm chứng:** so report S4 base/prepared/after và trace lỗi theo seed, có phân đoạn nếu report hỗ trợ. **Trạng thái: BLOCKED** — chưa có kết quả S4; cần Hải xác nhận dữ liệu phân đoạn và regression.
+4. **Hàng chờ duyệt:** Khi nhu cầu duyệt tăng, ca cần người phải được nhận xử lý trong SLA mock 60 phút; nếu nguy cơ vượt SLA hoặc ca bị ùn thì kích hoạt cảnh báo và quy trình can thiệp do Ops phê duyệt. **Invariant/metric:** `queue_stuck = 0` theo tiêu chí đã ký, đồng thời `queue_wait_max_min ≤ 60`; theo dõi số ca và độ phủ. **Kiểm chứng:** đọc khối queue và các dòng vượt trần của report S4 theo từng mốc; kiểm runbook và cấu hình nhân sự với Đức. **Trạng thái: BLOCKED** — chưa có report và chưa xác nhận quy trình can thiệp.
+
+Kiểm bằng gì (hàm trong `guards.py`, dòng report nào): `write_gate`/event và ledger cho fail-open; `business.daily_refund_cap_vnd` và `ops.refund` cho trần; report `wrongful_refund_vnd`, `wrongful_carrier_faults`, `ops.queue`, `coverage` và trace tương ứng. Đây là cách kiểm đề xuất, không khẳng định đã đạt.
 
 ### Câu 3.3 · Một giả định về môi trường mà người thiết kế đã ngầm tin, nhưng nhiều khả năng sai ngoài thực tế
 
@@ -442,6 +447,6 @@ Cột v1 nằm ở Phiếu B mục B8; không sửa cột đó.
 - Một thứ bộ thử hôm nay chưa đo, và nó ảnh hưởng quyết định ra sao: …
 
 **Ba dòng bắt buộc** (chép nguyên ba câu này sang `submission/submission.json`, mục `three_lines`)
-1. Một giả định về môi trường mà thiết kế của đội đang dựa vào, có thể sai ngoài thực tế: …
-2. Gate của đội chỉ GIẢM khả năng hay thực sự NGĂN được tác hại? Vì sao: …
-3. Vì data là mock, cần đo lại gì trong pilot thật trước Bước đánh giá 2: …
+1. Một giả định về môi trường mà thiết kế của đội đang dựa vào, có thể sai ngoài thực tế: **DRAFT:** Tracking và chính sách được cập nhật đủ kịp thời để người duyệt và cổng đối chiếu khi lượng ticket tăng; cần nhóm xác nhận.
+2. Gate của đội chỉ GIẢM khả năng hay thực sự NGĂN được tác hại? Vì sao: **DRAFT / BLOCKED:** Chưa đủ report S4 ba mốc để kết luận; cần đối chiếu từng nhánh lỗi, điểm chặn và trường hợp gate hỏng trước khi xác định giảm hay ngăn.
+3. Vì data là mock, cần đo lại gì trong pilot thật trước Bước đánh giá 2: **DRAFT:** Đo lượng ticket theo giờ, tỷ lệ và thời gian chờ duyệt, ca ùn, tiền hoàn sai, tổng hoàn tự động, chi phí/ticket và ROI theo kho; nhóm cần chốt cửa sổ đo và ngưỡng theo tiêu chí đã ký.
