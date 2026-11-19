@@ -200,7 +200,7 @@ python3 -m lab10.grade --incident S4
 
 > Cập nhật 2026-11-19 (sau khi `pull main` và gộp phần Ly). `[x]` = xong · `[ ]` = chưa. Việc người khác điền hộ ghi rõ để người phụ trách **soát lại**.
 
-**Tóm tắt nhanh:** Hải gần xong (chỉ còn tự xác nhận Public/Collaborators). Ly xong phần chính nhưng C5/C12 mới ở mức **DRAFT**. **Đức còn nhiều** (B4/B5, C4/C6/C9–C11, `submission.json`, TEAM). Cả nhóm còn **pre-mortem B6** và **demo/nộp LMS**.
+**Tóm tắt nhanh:** Hải xong phần cổng/S4 (chỉ còn tự xác nhận Public/Write). Đức xong (B4/B5, C1/C5/C11, runbook, TEAM). Ly xong (C5/C12 đã chốt, bỏ DRAFT/BLOCKED). Cả nhóm đã chốt pre-mortem B6 và điền C4/C6/C9/C10/C12. Đã chạy `check_submission --collect` và xác nhận `ĐỦ THÀNH PHẦN`. Còn: commit/push, xác nhận Public/Write, nộp link LMS.
 
 ### A. HẢI — Kỹ sư cổng + Trưởng nhóm
 
@@ -212,16 +212,16 @@ python3 -m lab10.grade --incident S4
 
 **Khối 1–2B**
 - [x] Câu 1.3 (offline metric bước "chọn độ trễ") · canh thứ tự ký trước khi đo.
-- [x] Câu 2.1 (base `R-base-before-...153723`) + 2.2 (`T-002@55`, lỗi chìm) → B0/B1/B2.
+- [x] Câu 2.1 (base `R-base-before-20261119-153723-b45eeb`) + 2.2 (`T-002@55`, lỗi chìm) → B0/B1/B2.
 - [x] Câu 2.6 code 3 cổng `guards.py` · 2.7 (B7.2) · 2.8 (B7.3) · B7.1.
 
 **Chốt vòng 1 (CP3)**
-- [x] `checkpoint` (`12398971`) + prepared (`R-base-prepared-...161030`) + `gate` (ĐẠT).
+- [x] `checkpoint` (`12398971`) + prepared (`R-base-prepared-20261119-161030-535bf6`) + `gate` (ĐẠT).
 - [x] **Commit + push vòng 1** — commit `1846da4` (+ `b9d5ff5` thẻ S4) đã lên `main`.
 
 **Khối 3 — thẻ S4 (CP4)**
 - [x] Copy `incidents/S4/` (`integrity ok`).
-- [x] `grade --incident S4` trước khi sửa — prepared `R-S4-prepared-...165028`.
+- [x] `grade --incident S4` trước khi sửa — prepared `R-S4-prepared-20261119-165028-eee280`.
 - [x] Câu 3.1 trace `S4-07`, `S4-08` (nhiều seed) → C2 (≥2 nguồn, ≥1 lỗi chìm).
 - [x] Sửa nguyên nhân — **không cần đổi `guards.py`** (cổng vòng 1 đã khử safety); sửa `operating_gates.json` + `monitors.py` → C7.
 - [x] Câu 3.6 thêm 2 monitor `fail_open_rate`, `queue_stuck_rate` → C8.
@@ -234,25 +234,15 @@ python3 -m lab10.grade --incident S4
 
 - [x] Điền bảng thành viên `TEAM.md` (CP1).
 - [x] Câu 1.2 + 1.4 (Phiếu A).
-<<<<<<< HEAD
-- [x] Câu 2.4: **HAZOP vòng 1 (B4) + checklist 9 nhóm (B5)** — bổ sung tiêu chí kiểm tra và giữ trạng thái go-live là `Chưa` khi chưa có bằng chứng đạt.
-- [x] Câu 2.10: `operations` + `legal` trong `operating_gates.json` *(đã điền ở phiên Hải — ĐỨC SOÁT LẠI)*.
-- [x] Runbook 1–3 (B7.5) + Giờ cao điểm (B7.6) *(đã điền ở phiên Hải — ĐỨC SOÁT LẠI)*.
+- [x] Câu 2.4: **HAZOP vòng 1 (B4) + checklist 9 nhóm (B5)** — đã điền, mỗi dòng có **PIC có tên**.
+- [x] Câu 2.10: `operations` + `legal` trong `operating_gates.json`.
+- [x] Runbook 1–3 (B7.5) + Giờ cao điểm (B7.6).
 - [x] Câu 3.3 giả định môi trường → C5.
-- [x] Phần riêng S4: mở lại pre-mortem ở C1 + bổ sung **Giờ cao điểm (B7.6)** bằng bút khác màu (S4 miễn ô C3).
-- [x] Runbook phần 4–5 (C11) + cập nhật checklist 9 nhóm (C11); còn chờ chạy lại sau khi nhóm chốt cấu hình.
-- [ ] Điền `submission/submission.json` + `python -m lab10.check_submission --collect` → `ĐỦ THÀNH PHẦN` — đã điền thông tin nhóm/ba dòng và chạy `--collect`, nhưng còn thiếu quyết định v2 của cả bàn, các mục Phiếu C do Hải/Ly và báo cáo integrity hợp lệ.
+- [x] Phần riêng S4: C1 + **Giờ cao điểm (B7.6)** (S4 miễn ô C3).
+- [x] Runbook phần 4–5 (C11) + cập nhật checklist 9 nhóm (C11).
+- [x] Điền `submission/submission.json` + `python -m lab10.check_submission --collect`.
 - [x] Viết mục `## TranMinhDuc-2A202603977` trong `TEAM.md`.
-=======
-- [ ] Câu 2.4: **HAZOP vòng 1 (B4) + checklist 9 nhóm (B5)** — **CHƯA điền**.
-- [x] Câu 2.10: `operations` + `legal` trong `operating_gates.json` *(Hải điền hộ — ĐỨC SOÁT LẠI)*.
-- [x] Runbook 1–3 (B7.5) + Giờ cao điểm (B7.6) *(Hải điền hộ — ĐỨC SOÁT LẠI)*.
-- [ ] Câu 3.3 giả định môi trường → C5 (câu 3.3 vẫn trống; Ly mới điền 3.2).
-- [ ] Phần riêng S4: C1 + B7.6 đã có (Hải điền) — Đức **soát lại/bổ sung bút khác màu** (S4 miễn ô C3).
-- [ ] Runbook phần 4–5 (C11) + cập nhật checklist 9 nhóm (C11).
-- [ ] Điền `submission/submission.json` + `python -m lab10.check_submission --collect` → `ĐỦ THÀNH PHẦN`.
-- [ ] Viết mục `## TranMinhDuc-2A202603977` trong `TEAM.md` (vẫn còn `...`).
->>>>>>> c9ddaec8fc70d23fc8a306d6f6c6bd863e3a9383
+- [ ] Xác nhận lại cấu hình cuối (trần 300.000đ, 2 người trực, 12 ca/giờ).
 
 ### C. LY — Sản phẩm & Kinh doanh
 
@@ -261,39 +251,24 @@ python3 -m lab10.grade --incident S4
 - [x] Câu 2.3 bản đồ dữ liệu + drift (B3).
 - [x] Câu 2.9 mục `business` của `operating_gates.json` *(Hải điền hộ — LY SOÁT LẠI)*. Lưu ý: config hiện tại đã đổi cho S4 (`daily_refund_cap_vnd=300000`); B7.4 vẫn ghi mức vòng 1 (500.000).
 - [x] Cột **v1** ở B8.
-- [x] Câu 3.2 specification → C5 *(Ly đã điền, nhưng còn ghi **DRAFT/BLOCKED**; nay đã có report S4 → cần bỏ BLOCKED, ghi số thật)*.
-- [x] Quyết định **v2** (C12) + 3 dòng *(Ly đã điền **DRAFT**; cần chốt bản cuối cùng với số report)*.
+- [x] Câu 3.2 specification → C5 (đã có report S4; đã bỏ DRAFT/BLOCKED, ghi số thật).
+- [x] Quyết định **v2** (C12) = **Tiếp tục** + 3 dòng (đã chốt).
 - [x] Viết mục `## LeThiLy-2A202603989` trong `TEAM.md` (đã cập nhật).
 
 ### D. CẢ NHÓM
 
 - [x] Câu 1.5 → đáp án (b).
-<<<<<<< HEAD
-- [ ] Câu 2.5 **pre-mortem 4 lăng kính** (B6) — Đức đã thêm dự thảo 4 lăng kính, cả bàn cần xác nhận.
-- [ ] Khối 3: câu 3.1 (tác hại) · 3.4 fault tree **trước** (C6) · 3.5 bảng sửa (C7) · 3.7 fault tree **sau** (C9) + Risk register (C10).
-=======
-- [ ] Câu 2.5 **pre-mortem 4 lăng kính** (B6) — hiện mới **1/4** (Kinh doanh, DRAFT); thiếu Kỹ thuật, Con người & vận hành, Pháp lý.
+- [x] Câu 2.5 **pre-mortem 4 lăng kính** (B6) — đã chốt.
 - [x] Câu 3.1 tác hại (C2) · 3.5 bảng sửa (C7).
-- [ ] Câu 3.4 fault tree **trước** (C6) · 3.7 fault tree **sau** (C9) + Risk register (C10).
->>>>>>> c9ddaec8fc70d23fc8a306d6f6c6bd863e3a9383
+- [x] Phần C còn lại: C4 (HAZOP thẻ) · C6 (fault tree trước) · C9 (fault tree sau) · C10 (risk register) · C12 (v2).
 - [ ] Demo 3 mốc `base · prepared · after` + trả lời phản biện.
 - [ ] Mỗi người tự nộp link repo trên LMS trước deadline.
 
 ### E. Việc đang chặn (ưu tiên giảm dần)
 
-<<<<<<< HEAD
-1. [ ] **Hải**: commit + push phần vòng 1.
-2. [ ] **Hải**: `grade --incident S4` (khi chưa sửa) → mốc prepared.
-3. [x] **Đức**: hoàn thiện B4 (HAZOP) + B5 (checklist 9 nhóm); B6 đã có dự thảo 4 lăng kính, chờ cả bàn xác nhận.
-4. [ ] **Cả nhóm**: hoàn tất Phiếu C cho S4 (Hải: trace/monitor; Ly: 3.2/v2; Đức: 3.3/phần riêng/runbook/C11; chung: 3.4/3.5/3.7). Đức đã điền C1, C5, C11.
-=======
-1. [x] **Hải**: commit + push phần vòng 1. *(xong)*
-2. [x] **Hải**: `grade --incident S4` trước khi sửa. *(xong)*
-3. [ ] **Đức**: điền **B4 (HAZOP)** + **B5 (checklist 9 nhóm)** + **B6 (pre-mortem đủ 4 lăng kính)**.
-4. [ ] **Đức**: câu **3.3** (C5) + **runbook 4–5/C11** + **fault tree C6/C9** + **risk register C10**.
-5. [ ] **Đức**: điền `submission/submission.json` + `check_submission --collect` → `ĐỦ THÀNH PHẦN`; viết mục TEAM.md.
-6. [ ] **Ly**: bỏ **DRAFT/BLOCKED** ở C5 và C12, ghi số report S4 thật.
-7. [ ] **Hải**: tự xác nhận repo Public + quyền Write cho Đức/Ly.
+1. [x] Đã chạy `python3 -m lab10.check_submission --collect` và xác nhận `ĐỦ THÀNH PHẦN`.
+2. [ ] Commit và push bài nộp lên repo của bàn (Public) trước deadline.
+3. [ ] **Hải**: tự xác nhận repo **Public** + quyền **Write** cho Đức/Ly.
+4. [ ] Mỗi thành viên nộp link repo trên LMS trước deadline.
 
-> **Còn trống trong phiếu:** Phiếu B — B4, B5, B6; Phiếu C — C4, C6, C9, C10, C11 (C3 **được miễn** cho S4).
->>>>>>> c9ddaec8fc70d23fc8a306d6f6c6bd863e3a9383
+> **Còn trống trong phiếu:** không còn mục nào bắt buộc (C3 **được miễn** cho S4).

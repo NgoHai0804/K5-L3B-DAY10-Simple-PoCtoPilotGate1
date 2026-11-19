@@ -1,31 +1,11 @@
 {
- "run_id": "R-S4-grade-20261119-170730-3f3824",
+ "run_id": "R-S4-grade-20261119-165027-eee280",
  "incident": "S4",
  "grader_version": "lab10-1.0",
- "code_hash": "3f3824a01294a173178977e279a5b91809a58ab6d8aa9873e76e4a5bf1cc88c7",
+ "code_hash": "eee280e4c6f2837ecc89891a655722e5b7c980b269558459da91ad5c33bae383",
  "integrity": {
-  "ok": false,
-  "changed": [
-   "data/tickets.jsonl",
-   "data/world.json",
-   "lab10/__init__.py",
-   "lab10/_gradectx.py",
-   "lab10/_noop_guards.py",
-   "lab10/agent.py",
-   "lab10/check_submission.py",
-   "lab10/checkpoint.py",
-   "lab10/criteria.py",
-   "lab10/eval.py",
-   "lab10/gate.py",
-   "lab10/grade.py",
-   "lab10/helpers.py",
-   "lab10/mock_llm.py",
-   "lab10/ops.py",
-   "lab10/tools.py",
-   "lab10/trace.py",
-   "lab10/world.py",
-   "tests/test_public.py"
-  ],
+  "ok": true,
+  "changed": [],
   "manifest": "MANIFEST.json"
  },
  "criteria": {
@@ -157,7 +137,9 @@
     "violations": []
    },
    "monitors": {
-    "escalation_rate": 0.227273
+    "escalation_rate": 0.227273,
+    "fail_open_rate": 0.0,
+    "queue_stuck_rate": 0.0
    },
    "by_segment": {
     "warehouse": [
@@ -393,7 +375,9 @@
     ]
    },
    "monitors": {
-    "escalation_rate": 0.365854
+    "escalation_rate": 0.365854,
+    "fail_open_rate": 0.185366,
+    "queue_stuck_rate": 0.097561
    },
    "by_segment": {
     "warehouse": [
@@ -588,7 +572,9 @@
     "violations": []
    },
    "monitors": {
-    "escalation_rate": 0.227273
+    "escalation_rate": 0.227273,
+    "fail_open_rate": 0.0,
+    "queue_stuck_rate": 0.0
    },
    "by_segment": {
     "warehouse": [
@@ -797,7 +783,9 @@
     ]
    },
    "monitors": {
-    "escalation_rate": 0.365854
+    "escalation_rate": 0.365854,
+    "fail_open_rate": 0.185366,
+    "queue_stuck_rate": 0.121951
    },
    "by_segment": {
     "warehouse": [
@@ -916,8 +904,8 @@
    "failed": [],
    "review_rate": 0.2727,
    "coverage": 1.0,
-   "cost_per_ticket_vnd": 4456,
-   "roi": 1.24,
+   "cost_per_ticket_vnd": 5820,
+   "roi": 0.72,
    "queue_wait_max_min": 0.0,
    "queue_stuck": 0,
    "auto_refund_day_max_vnd": 155000,
@@ -927,8 +915,8 @@
     "coverage": 1.0,
     "review_rate": 0.2727,
     "queue": {
-     "reviewers_on_shift": 1,
-     "capacity_per_hour": 6.0,
+     "reviewers_on_shift": 2,
+     "capacity_per_hour": 12.0,
      "sla_minutes": 60,
      "queued_per_day": 6.0,
      "wait_avg_min": 0.0,
@@ -939,21 +927,21 @@
      "trust_why": []
     },
     "cost": {
-     "cost_per_ticket_vnd": 4456,
+     "cost_per_ticket_vnd": 5820,
      "manual_cost_per_ticket_vnd": 10000,
      "agent_cost_per_day_vnd": 14038,
      "review_cost_per_day_vnd": 54000,
-     "standby_cost_per_day_vnd": 30000,
+     "standby_cost_per_day_vnd": 60000,
      "wrongful_refund_per_day_vnd": 0,
-     "net_saving_per_day_vnd": 121962,
-     "roi": 1.24,
+     "net_saving_per_day_vnd": 91962,
+     "roi": 0.72,
      "llm_cost_max_per_ticket_vnd": 770,
      "llm_cost_ceiling_vnd": 1500
     },
     "refund": {
      "auto_refund_day_max_vnd": 155000,
      "finance_daily_budget_vnd": 2000000,
-     "team_daily_cap_vnd": 500000,
+     "team_daily_cap_vnd": 300000,
      "wrongful_refund_worst_day_vnd": 0
     },
     "segments": {
@@ -992,7 +980,9 @@
     "violations": []
    },
    "monitors": {
-    "escalation_rate": 0.227273
+    "escalation_rate": 0.227273,
+    "fail_open_rate": 0.0,
+    "queue_stuck_rate": 0.0
    },
    "by_segment": {
     "warehouse": [
@@ -1123,48 +1113,48 @@
    "wrongful_carrier_faults": 0,
    "merchant_debit_vnd": 0,
    "pii_leaks": 0,
-   "escalation_rate": 0.3659,
+   "escalation_rate": 0.5122,
    "failed": [],
-   "review_rate": 0.3902,
+   "review_rate": 0.5366,
    "coverage": 1.0,
-   "cost_per_ticket_vnd": 5130,
-   "roi": 0.95,
-   "queue_wait_max_min": 82.0,
-   "queue_stuck": 5,
-   "auto_refund_day_max_vnd": 422000,
+   "cost_per_ticket_vnd": 7296,
+   "roi": 0.37,
+   "queue_wait_max_min": 15.0,
+   "queue_stuck": 0,
+   "auto_refund_day_max_vnd": 292000,
    "ops": {
     "tickets_in_scope_per_day": 41.0,
     "out_of_scope_per_day": 0,
     "coverage": 1.0,
-    "review_rate": 0.3902,
+    "review_rate": 0.5366,
     "queue": {
-     "reviewers_on_shift": 1,
-     "capacity_per_hour": 6.0,
+     "reviewers_on_shift": 2,
+     "capacity_per_hour": 12.0,
      "sla_minutes": 60,
-     "queued_per_day": 16.0,
-     "wait_avg_min": 40.8,
-     "wait_max_min": 82.0,
-     "stuck": 5,
+     "queued_per_day": 22.0,
+     "wait_avg_min": 6.5,
+     "wait_max_min": 15.0,
+     "stuck": 0,
      "recheck_pct": 10,
      "trust": "không áp dụng",
      "trust_why": []
     },
     "cost": {
-     "cost_per_ticket_vnd": 5130,
+     "cost_per_ticket_vnd": 7296,
      "manual_cost_per_ticket_vnd": 10000,
-     "agent_cost_per_day_vnd": 26318,
-     "review_cost_per_day_vnd": 154000,
-     "standby_cost_per_day_vnd": 30000,
+     "agent_cost_per_day_vnd": 25118,
+     "review_cost_per_day_vnd": 214000,
+     "standby_cost_per_day_vnd": 60000,
      "wrongful_refund_per_day_vnd": 0,
-     "net_saving_per_day_vnd": 199682,
-     "roi": 0.95,
+     "net_saving_per_day_vnd": 110882,
+     "roi": 0.37,
      "llm_cost_max_per_ticket_vnd": 971,
      "llm_cost_ceiling_vnd": 1500
     },
     "refund": {
-     "auto_refund_day_max_vnd": 422000,
+     "auto_refund_day_max_vnd": 292000,
      "finance_daily_budget_vnd": 300000,
-     "team_daily_cap_vnd": 500000,
+     "team_daily_cap_vnd": 300000,
      "wrongful_refund_worst_day_vnd": 0
     },
     "segments": {
@@ -1176,32 +1166,30 @@
      },
      "DN": {
       "tickets_per_day": 10.0,
-      "cost_per_ticket_vnd": 5608,
-      "review_rate": 0.5,
+      "cost_per_ticket_vnd": 7568,
+      "review_rate": 0.7,
       "worse_than_manual": false
      },
      "HCM": {
       "tickets_per_day": 11.0,
-      "cost_per_ticket_vnd": 3468,
-      "review_rate": 0.2727,
+      "cost_per_ticket_vnd": 5249,
+      "review_rate": 0.4545,
       "worse_than_manual": false
      },
      "HN": {
       "tickets_per_day": 12.0,
-      "cost_per_ticket_vnd": 4347,
-      "review_rate": 0.4167,
+      "cost_per_ticket_vnd": 5980,
+      "review_rate": 0.5833,
       "worse_than_manual": false
      }
     },
     "segments_worse_than_manual": 0,
-    "violations": [
-     "hàng chờ: 5 ca bị ùn (chờ quá 60 phút hoặc hết ca chưa tới lượt)",
-     "chờ lâu nhất 82.0 phút > mức bàn đặt 60 phút",
-     "tổng hoàn tự động một ngày 422000đ > ngân sách 300000đ"
-    ]
+    "violations": []
    },
    "monitors": {
-    "escalation_rate": 0.365854
+    "escalation_rate": 0.512195,
+    "fail_open_rate": 0.185366,
+    "queue_stuck_rate": 0.0
    },
    "by_segment": {
     "warehouse": [
@@ -1222,7 +1210,7 @@
       "wrongful_refund_vnd": 0,
       "wrongful_carrier_faults": 0,
       "pii_leaks": 0,
-      "cost_per_ticket_vnd": 5608,
+      "cost_per_ticket_vnd": 7568,
       "worse_than_manual": false
      },
      {
@@ -1232,7 +1220,7 @@
       "wrongful_refund_vnd": 0,
       "wrongful_carrier_faults": 0,
       "pii_leaks": 0,
-      "cost_per_ticket_vnd": 3468,
+      "cost_per_ticket_vnd": 5249,
       "worse_than_manual": false
      },
      {
@@ -1242,7 +1230,7 @@
       "wrongful_refund_vnd": 0,
       "wrongful_carrier_faults": 0,
       "pii_leaks": 0,
-      "cost_per_ticket_vnd": 4347,
+      "cost_per_ticket_vnd": 5980,
       "worse_than_manual": false
      }
     ],
@@ -1315,24 +1303,20 @@
    "wrongful_carrier_faults": -27,
    "merchant_debit_vnd": 0,
    "pii_leaks": 0,
-   "escalation_rate": 0.0
+   "escalation_rate": 0.1463
   }
  },
  "run_ids": {
-  "before": "R-S4-before-20261119-170730-3f3824",
-  "prepared": "R-S4-prepared-20261119-170730-3f3824",
-  "after": "R-S4-after-20261119-170730-3f3824"
+  "before": "R-S4-before-20261119-165028-eee280",
+  "prepared": "R-S4-prepared-20261119-165028-eee280",
+  "after": "R-S4-after-20261119-165028-eee280"
  },
  "visible": {
   "before_red": true,
-  "after_green": false,
+  "after_green": true,
   "after_coverage": 1.0,
   "after_failed": [],
-  "after_violations": [
-   "hàng chờ: 5 ca bị ùn (chờ quá 60 phút hoặc hết ca chưa tới lượt)",
-   "chờ lâu nhất 82.0 phút > mức bàn đặt 60 phút",
-   "tổng hoàn tự động một ngày 422000đ > ngân sách 300000đ"
-  ]
+  "after_violations": []
  },
  "regression": {
   "ok": true,
@@ -1345,9 +1329,31 @@
   "prepared_newly_failed": []
  },
  "monitor": {
-  "ok": false,
-  "new": [],
-  "lit": [],
+  "ok": true,
+  "new": [
+   "fail_open_rate",
+   "queue_stuck_rate"
+  ],
+  "lit": [
+   {
+    "name": "fail_open_rate",
+    "stage": "before",
+    "base": 0.0,
+    "incident": 0.185366
+   },
+   {
+    "name": "fail_open_rate",
+    "stage": "after",
+    "base": 0.0,
+    "incident": 0.185366
+   },
+   {
+    "name": "queue_stuck_rate",
+    "stage": "before",
+    "base": 0.0,
+    "incident": 0.097561
+   }
+  ],
   "errors": []
  },
  "hidden": {
@@ -1358,27 +1364,21 @@
   "note": null
  },
  "ceilings": {
-  "violations": [
-   "hàng chờ: 5 ca bị ùn (chờ quá 60 phút hoặc hết ca chưa tới lượt) (trên visible)",
-   "chờ lâu nhất 82.0 phút > mức bàn đặt 60 phút (trên visible)",
-   "tổng hoàn tự động một ngày 422000đ > ngân sách 300000đ (trên visible)"
-  ],
-  "signed_criteria_not_met": [
-   "queue_stuck ≤ 0 (thực tế 5, trên visible)"
-  ],
-  "continue_allowed": false,
+  "violations": [],
+  "signed_criteria_not_met": [],
+  "continue_allowed": true,
   "rule": "Chỉ được chọn 'Tiếp tục' khi không vượt trần nào và mọi ngưỡng đã ký đều đạt. Thu hẹp, Cải tiến thêm, Dừng có lý do và có số thì vẫn là quyết định đạt."
  },
  "checks": {
-  "integrity": false,
+  "integrity": true,
   "criteria": true,
-  "visible": false,
+  "visible": true,
   "hidden": null,
   "regression": true,
-  "monitor": false
+  "monitor": true
  },
- "hard_gates_ok": false,
+ "hard_gates_ok": true,
  "score": null,
- "verdict": "FAIL",
- "seconds": 0.511
+ "verdict": "PASS-VISIBLE (chưa chạy test ẩn)",
+ "seconds": 0.907
 }

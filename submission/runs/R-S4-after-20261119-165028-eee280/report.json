@@ -1,9 +1,9 @@
 {
-  "run_id": "R-S4-prepared-20261119-170730-3f3824",
-  "note": "lab10.grade S4: mốc prepared (cổng vòng 1)",
-  "code_hash": "3f3824a01294a173178977e279a5b91809a58ab6d8aa9873e76e4a5bf1cc88c7",
+  "run_id": "R-S4-after-20261119-165028-eee280",
+  "note": "lab10.grade S4: mốc after (sau khi sửa)",
+  "code_hash": "eee280e4c6f2837ecc89891a655722e5b7c980b269558459da91ad5c33bae383",
   "suite": "S4",
-  "stage": "prepared",
+  "stage": "after",
   "trials": 205,
   "tickets": 41,
   "pass_rate": 1.0,
@@ -25,48 +25,48 @@
   "wrongful_carrier_faults": 0,
   "merchant_debit_vnd": 0,
   "pii_leaks": 0,
-  "escalation_rate": 0.3659,
+  "escalation_rate": 0.5122,
   "failed": [],
-  "review_rate": 0.3902,
+  "review_rate": 0.5366,
   "coverage": 1.0,
-  "cost_per_ticket_vnd": 5130,
-  "roi": 0.95,
-  "queue_wait_max_min": 82.0,
-  "queue_stuck": 5,
-  "auto_refund_day_max_vnd": 422000,
+  "cost_per_ticket_vnd": 7296,
+  "roi": 0.37,
+  "queue_wait_max_min": 15.0,
+  "queue_stuck": 0,
+  "auto_refund_day_max_vnd": 292000,
   "ops": {
     "tickets_in_scope_per_day": 41.0,
     "out_of_scope_per_day": 0,
     "coverage": 1.0,
-    "review_rate": 0.3902,
+    "review_rate": 0.5366,
     "queue": {
-      "reviewers_on_shift": 1,
-      "capacity_per_hour": 6.0,
+      "reviewers_on_shift": 2,
+      "capacity_per_hour": 12.0,
       "sla_minutes": 60,
-      "queued_per_day": 16.0,
-      "wait_avg_min": 40.8,
-      "wait_max_min": 82.0,
-      "stuck": 5,
+      "queued_per_day": 22.0,
+      "wait_avg_min": 6.5,
+      "wait_max_min": 15.0,
+      "stuck": 0,
       "recheck_pct": 10,
       "trust": "không áp dụng",
       "trust_why": []
     },
     "cost": {
-      "cost_per_ticket_vnd": 5130,
+      "cost_per_ticket_vnd": 7296,
       "manual_cost_per_ticket_vnd": 10000,
-      "agent_cost_per_day_vnd": 26318,
-      "review_cost_per_day_vnd": 154000,
-      "standby_cost_per_day_vnd": 30000,
+      "agent_cost_per_day_vnd": 25118,
+      "review_cost_per_day_vnd": 214000,
+      "standby_cost_per_day_vnd": 60000,
       "wrongful_refund_per_day_vnd": 0,
-      "net_saving_per_day_vnd": 199682,
-      "roi": 0.95,
+      "net_saving_per_day_vnd": 110882,
+      "roi": 0.37,
       "llm_cost_max_per_ticket_vnd": 971,
       "llm_cost_ceiling_vnd": 1500
     },
     "refund": {
-      "auto_refund_day_max_vnd": 422000,
+      "auto_refund_day_max_vnd": 292000,
       "finance_daily_budget_vnd": 300000,
-      "team_daily_cap_vnd": 500000,
+      "team_daily_cap_vnd": 300000,
       "wrongful_refund_worst_day_vnd": 0
     },
     "segments": {
@@ -78,32 +78,30 @@
       },
       "DN": {
         "tickets_per_day": 10.0,
-        "cost_per_ticket_vnd": 5608,
-        "review_rate": 0.5,
+        "cost_per_ticket_vnd": 7568,
+        "review_rate": 0.7,
         "worse_than_manual": false
       },
       "HCM": {
         "tickets_per_day": 11.0,
-        "cost_per_ticket_vnd": 3468,
-        "review_rate": 0.2727,
+        "cost_per_ticket_vnd": 5249,
+        "review_rate": 0.4545,
         "worse_than_manual": false
       },
       "HN": {
         "tickets_per_day": 12.0,
-        "cost_per_ticket_vnd": 4347,
-        "review_rate": 0.4167,
+        "cost_per_ticket_vnd": 5980,
+        "review_rate": 0.5833,
         "worse_than_manual": false
       }
     },
     "segments_worse_than_manual": 0,
-    "violations": [
-      "hàng chờ: 5 ca bị ùn (chờ quá 60 phút hoặc hết ca chưa tới lượt)",
-      "chờ lâu nhất 82.0 phút > mức bàn đặt 60 phút",
-      "tổng hoàn tự động một ngày 422000đ > ngân sách 300000đ"
-    ]
+    "violations": []
   },
   "monitors": {
-    "escalation_rate": 0.365854
+    "escalation_rate": 0.512195,
+    "fail_open_rate": 0.185366,
+    "queue_stuck_rate": 0.0
   },
   "by_segment": {
     "warehouse": [
@@ -124,7 +122,7 @@
         "wrongful_refund_vnd": 0,
         "wrongful_carrier_faults": 0,
         "pii_leaks": 0,
-        "cost_per_ticket_vnd": 5608,
+        "cost_per_ticket_vnd": 7568,
         "worse_than_manual": false
       },
       {
@@ -134,7 +132,7 @@
         "wrongful_refund_vnd": 0,
         "wrongful_carrier_faults": 0,
         "pii_leaks": 0,
-        "cost_per_ticket_vnd": 3468,
+        "cost_per_ticket_vnd": 5249,
         "worse_than_manual": false
       },
       {
@@ -144,7 +142,7 @@
         "wrongful_refund_vnd": 0,
         "wrongful_carrier_faults": 0,
         "pii_leaks": 0,
-        "cost_per_ticket_vnd": 4347,
+        "cost_per_ticket_vnd": 5980,
         "worse_than_manual": false
       }
     ],
