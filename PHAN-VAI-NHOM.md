@@ -257,7 +257,7 @@ python3 -m lab10.grade --incident S4
 - [x] Câu 2.3 bản đồ dữ liệu + ví dụ drift (B3).
 - [x] Câu 2.9 mục `business` của `operating_gates.json` *(đã điền ở phiên Hải — LY SOÁT LẠI)*.
 - [x] Cột **v1** ở B8.
-- [ ] Câu 3.2 specification kiểm được bằng code/số → C5.
+- [x] Câu 3.2 specification kiểm được bằng code/số → C5.
 - [ ] Quyết định **v2** (C12) + 3 dòng bắt buộc.
 - [ ] Viết mục `## LeThiLy-2A202603989` trong `TEAM.md`.
 
