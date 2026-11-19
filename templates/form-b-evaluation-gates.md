@@ -226,15 +226,15 @@ Trạng thái: **Xong** (có bằng chứng) · **Chưa** · **Không áp dụng
 
 | # | Nhóm việc | Bằng chứng lấy từ đâu (đã có sẵn trong lab) | Mục cần kiểm tra | Trạng thái | Bằng chứng | PIC |
 |---|---|---|---|---|---|---|
-| 1 | Chất lượng | Report `lab10.eval` (mã lần chạy) + bảng soát lỗi (Phiếu B mục B2) | | Chưa | `R-base-before-20261119-151451-bde05c`: `pass_rate` 0,9909, `pass_k` 0,9545 nhưng hoàn sai 20.000đ và 1 lỗi hãng oan; B2 có trace `T-002@55`. | Ngô Ngọc Hải |
-| 2 | Dữ liệu | Bản đồ dữ liệu (Phiếu B mục B3, câu 2.3): trường nào là nguồn sự thật, trường nào là bản sao | | Chưa | B3 đã phân biệt ticket với `orders/parcels`, policy, approvals và ledger mock; nguồn production, người cập nhật và tần suất đồng bộ còn chưa xác nhận. | Lê Thị Ly |
-| 3 | Bảo mật | Một vòng HAZOP với guideword PERTURBED (Phiếu B mục B4): chữ nào đi vào model mà không do LogiX viết | | Chưa | B4 đã nêu rủi ro `customer_note` tự do đi vào payload `notify_carrier`; trace `T-002@55` có `customer_note` và `district`, report ghi `pii_leaks = 0`; biện pháp lọc/chặn chưa được triển khai. | Trần Minh Đức |
-| 4 | Quyền hạn | `config/switches.json` + guard trước lệnh ghi; thẻ S2, S8 có thêm mục mức kiểm soát (Phiếu C mục C3) | | Chưa | `config/switches.json` hiện bật cả bốn thao tác; baseline không có guard của bàn ngăn `issue_refund`/`file_carrier_fault` trong `T-002@55`. | Ngô Ngọc Hải |
-| 5 | Hiệu năng, hạ tầng | Đội tự ước tính; HAZOP guideword INCAPABLE: LLM không trả lời thì sao; số người duyệt và số ca mỗi giờ | | Chưa | `ops_facts`: 1 người duyệt mặc định, 6 ca/giờ; baseline có 5 ca/ngày vào hàng chờ và 0 ca ùn, nhưng kịch bản cao điểm/LLM không phản hồi chưa được kiểm chứng. | Trần Minh Đức |
-| 6 | Chi phí | Khối "kinh doanh và vận hành" của report: chi phí mỗi ticket so với làm tay, ROI, tiền LLM ticket đắt nhất; `config/operating_gates.json` mục `business` | | Chưa | Baseline: 4.203đ/ticket so với làm tay 10.000đ, ROI 1,34, LLM cao nhất 670đ; phân khúc kho `?` là 10.359đ/ticket và các business gate hiện chưa đặt. | Lê Thị Ly |
-| 7 | Vận hành | Runbook (Phiếu B mục B7.5–B7.6) + `config/operating_gates.json` mục `operations` (PIC, người duyệt, số người trực, điều kiện dừng, kênh báo tin) + metric trong `monitors.py` | | Chưa | `operations` còn thiếu PIC, approver, hạn chờ, điều kiện dừng và kênh báo; runbook B7.5–B7.6 và monitor mới chưa hoàn tất. | Trần Minh Đức |
-| 8 | Con người, pháp lý | Bên thứ ba (hãng, tài xế, shop, người nhận quà, người đứng tên duyệt); `config/operating_gates.json` mục `legal`; thẻ S6, S7, S8 có mục riêng ở Phiếu C mục C3 | | Chưa | B2/B4 ghi nhận nguy cơ quy lỗi oan cho VNX/tài xế; `legal.pii_fields_blocked_to_third_party` còn rỗng và `carrier_fault_requires_recorded_cause` đang `false`. Không có PII leak được xác nhận trong baseline. | Trần Minh Đức |
-| 9 | Quyết định | Câu tiêu chí (Phiếu A mục A4) + hash Bản tiêu chí đã ký + quyết định Gate 1 (Phiếu B mục B8, Phiếu C mục C12) | | Chưa | Tiêu chí đã ký (commit `2e78acd`); baseline còn hai ngưỡng an toàn chưa đạt. Chưa có quyết định v1 vì chưa chốt và đo mốc `prepared`. | Lê Thị Ly |
+| 1 | Chất lượng | Report `lab10.eval` (mã lần chạy) + bảng soát lỗi (Phiếu B mục B2) | Các ngưỡng chất lượng và an toàn đã ký đều đạt; không có ca hợp lệ mới bị hỏng. | Chưa | `R-base-before-20261119-151451-bde05c`: `pass_rate` 0,9909, `pass_k` 0,9545 nhưng hoàn sai 20.000đ và 1 lỗi hãng oan; B2 có trace `T-002@55`. | Ngô Ngọc Hải |
+| 2 | Dữ liệu | Bản đồ dữ liệu (Phiếu B mục B3, câu 2.3): trường nào là nguồn sự thật, trường nào là bản sao | Nguồn sự thật, chủ sở hữu, thời điểm cập nhật và độ mới của dữ liệu được xác định cho mọi trường dùng khi quyết định. | Chưa | B3 đã phân biệt ticket với `orders/parcels`, policy, approvals và ledger mock; nguồn production, người cập nhật và tần suất đồng bộ còn chưa xác nhận. | Lê Thị Ly |
+| 3 | Bảo mật | Một vòng HAZOP với guideword PERTURBED (Phiếu B mục B4): chữ nào đi vào model mà không do LogiX viết | Payload gửi bên thứ ba chỉ có trường được phép; PII trong ghi chú tự do không bị chuyển tiếp. | Chưa | B4 đã nêu rủi ro `customer_note` tự do đi vào payload `notify_carrier`; trace `T-002@55` có `customer_note` và `district`, report ghi `pii_leaks = 0`; biện pháp lọc/chặn chưa được kiểm chứng trên pilot thật. | Trần Minh Đức |
+| 4 | Quyền hạn | `config/switches.json` + guard trước lệnh ghi; thẻ S2, S8 có thêm mục mức kiểm soát (Phiếu C mục C3) | Mọi lệnh ghi có guard theo nguồn dữ liệu đáng tin cậy, quyền hạn và công tắc dừng đã được thử. | Chưa | `config/switches.json` hiện bật cả bốn thao tác; baseline không có guard của bàn ngăn `issue_refund`/`file_carrier_fault` trong `T-002@55`. | Ngô Ngọc Hải |
+| 5 | Hiệu năng, hạ tầng | Đội tự ước tính; HAZOP guideword INCAPABLE: LLM không trả lời thì sao; số người duyệt và số ca mỗi giờ | Tải cao điểm và lỗi LLM không làm hàng chờ vượt SLA; có phương án giảm tải và nhân sự dự phòng khả thi. | Chưa | `ops_facts`: 1 người duyệt mặc định, 6 ca/giờ; baseline có 5 ca/ngày vào hàng chờ và 0 ca ùn, nhưng kịch bản cao điểm/LLM không phản hồi chưa được kiểm chứng. | Trần Minh Đức |
+| 6 | Chi phí | Khối "kinh doanh và vận hành" của report: chi phí mỗi ticket so với làm tay, ROI, tiền LLM ticket đắt nhất; `config/operating_gates.json` mục `business` | Chi phí toàn phần, gồm công duyệt và trực, nằm trong trần; ROI và từng phân khúc không vi phạm ngưỡng. | Chưa | Baseline: 4.203đ/ticket so với làm tay 10.000đ, ROI 1,34, LLM cao nhất 670đ; phân khúc kho `?` là 10.359đ/ticket và các business gate hiện chưa đặt. | Lê Thị Ly |
+| 7 | Vận hành | Runbook (Phiếu B mục B7.5–B7.6) + `config/operating_gates.json` mục `operations` (PIC, người duyệt, số người trực, điều kiện dừng, kênh báo tin) + metric trong `monitors.py` | Có PIC, người duyệt, công suất, SLA, kênh báo, điều kiện dừng và quy trình chạy thử tải cao điểm. | Chưa | Tại CP2A, `operations`, runbook và monitor mới chưa hoàn tất; các mục được điền ở CP2B cần được kiểm tra lại bằng report tải cao điểm. | Trần Minh Đức |
+| 8 | Con người, pháp lý | Bên thứ ba (hãng, tài xế, shop, người nhận quà, người đứng tên duyệt); `config/operating_gates.json` mục `legal`; thẻ S6, S7, S8 có mục riêng ở Phiếu C mục C3 | Không gửi PII ngoài mục đích; chỉ ghi lỗi hãng khi tracking có nguyên nhân đã xác nhận; có cách tiếp nhận khiếu nại. | Chưa | B2/B4 ghi nhận nguy cơ quy lỗi oan cho VNX/tài xế; ở CP2A `legal` chưa chốt. Không có PII leak được xác nhận trong baseline. | Trần Minh Đức |
+| 9 | Quyết định | Câu tiêu chí (Phiếu A mục A4) + hash Bản tiêu chí đã ký + quyết định Gate 1 (Phiếu B mục B8, Phiếu C mục C12) | Quyết định v1/v2 khớp tiêu chí đã ký, report đúng mốc và mọi điều kiện dừng được xử lý. | Chưa | Tiêu chí đã ký (commit `2e78acd`); tại CP2A baseline còn hai ngưỡng an toàn chưa đạt. Chưa có quyết định v1 vì chưa chốt và đo mốc `prepared`. | Lê Thị Ly |
 
 Ô "Chưa" có rủi ro cao → chuyển thành một dòng Risk register (Phiếu C mục C10).
 
@@ -269,11 +269,10 @@ Bốn lăng kính (bắt buộc đủ cả bốn; dự án AI hay chết ở ba 
 
 | Lý do thất bại (viết ở thì quá khứ) | Lăng kính | Kiểm được hôm nay? (trace / data / config nào) | Thành cổng phòng ngừa nào (code hay config) / hay vào risk register |
 |---|---|---|---|
-| | Kỹ thuật | | |
+| **DRAFT Đức:** Trợ lý đã lấy độ trễ do ticket khai thay vì tracking, rồi ghi lỗi hãng và đề xuất hoàn sai. | Kỹ thuật | `T-002@55`, `proposal.basis`, `delay_days` trong ticket và tracking; baseline ghi 20.000đ hoàn sai, 1 lỗi hãng oan. | Đối chiếu tracking và policy trước mọi lệnh ghi; lệch hoặc thiếu dữ liệu thì không ghi, chuyển người (`guards.py`, PIC Hải). |
 | **DRAFT, chờ cả bàn review:** Chi phí xử lý mỗi ticket đã vượt mục tiêu kinh doanh khi nhiều ca phải chuyển người, làm hiệu quả pilot suy giảm. | Kinh doanh | `data/world.json` → `ops_facts`; sau khi có report, đối chiếu chi phí/ticket, ROI và hàng chờ theo mã lần chạy. Đây là rủi ro giả định, chưa phải kết quả đã đo sau cổng. | Đề xuất xem `business.cost_budget_per_ticket_vnd` và phạm vi pilot tại B7.4; lựa chọn cổng và nguồn lực do cả bàn quyết. |
-| | Con người và vận hành | | |
-| | Pháp lý | | |
-| | | | |
+| **DRAFT Đức:** Lượng ticket dồn theo giờ đã vượt công suất của người duyệt; hàng chờ chạm SLA và ca an toàn không được xử lý kịp. | Con người và vận hành | `data/world.json` → `ops_facts` (1 người mặc định, 6 ca/giờ, ca 480 phút); report hàng chờ, chờ lâu nhất và số ca ùn. | Ngưỡng gọi người dự phòng, giảm/tạm dừng lệnh ghi và chuyển quy trình thủ công tại B7.5–B7.6; mọi phương án tăng người phải đo lại ROI. |
+| **DRAFT Đức:** Nội dung tự do của khách đã bị đưa sang hãng hoặc một bản ghi thiếu căn cứ đã quy lỗi cho hãng/tài xế. | Pháp lý | B4 `notify_carrier`/`customer_note`, trace `T-002@55`, `pii_leaks`, `wrongful_carrier_faults`. | Chặn trường PII theo allow-list và yêu cầu nguyên nhân tracking đã ghi nhận trong `legal`; bảo toàn log và chuyển PIC khi không xác minh được. |
 
 ---
 
@@ -393,6 +392,13 @@ Lượng ticket có thể dồn gấp ba trong một giờ (ngày sale, sau bão
 | Ngưỡng nào thì **gọi thêm người** (hàng chờ bao nhiêu ca, chờ lâu nhất bao nhiêu phút)? Ai gọi? | Hàng chờ > 6 ca hoặc chờ lâu nhất > 30 phút → NV-TUNG gọi thêm người trực (tối đa 2 người). |
 | Ngưỡng nào thì **thu hẹp** phạm vi (khoá `business.pilot_scope`) hoặc **tắt** một thao tác ghi (`config/switches.json`)? Ai quyết? | Chờ lâu nhất > 60 phút hoặc > 3 ca bị ùn → NV-TUNG thu hẹp `pilot_scope` hoặc tắt `file_carrier_fault`. |
 | Thêm người thì chi phí mỗi ticket và ROI thay đổi thế nào (đọc report)? | Mỗi người thêm tốn phí giữ chỗ 30.000đ/ca (`ops_facts.reviewer_standby_fee_vnd`) → chi phí/ticket tăng, ROI giảm; chỉ thêm khi có nguy cơ ùn. |
+
+#### Bổ sung sau khi nhận S4 (đối chiếu bằng chứng, không ghi đè dự báo vòng 1)
+
+- `incidents/S4/tickets.jsonl` có 41 ticket; 30 ticket đến trong cùng một giờ. Năng lực 1 người × 6 ca/giờ không đủ để mặc định xử lý được đỉnh tải.
+- Grade `R-S4-grade-20261119-170730-3f3824`: mốc `prepared` và `after` đều còn 5 ca ùn, chờ lâu nhất 82 phút và tổng hoàn tự động 422.000đ > ngân sách Finance 300.000đ; các lỗi hoàn sai, lỗi hãng oan và PII đều bằng 0.
+- Giữ ngưỡng gọi người dự phòng ở hàng chờ > 6 hoặc chờ > 30 phút; nếu chờ > 60 phút hoặc có ca ùn thì dừng nhận lệnh ghi tự động và chuyển thủ công. Cảnh báo tài chính cần tính theo trần 300.000đ: vàng từ 240.000đ (80%), đỏ tại 300.000đ. PIC gọi/dừng: NV-TUNG; NV-OANH xác nhận số Finance.
+- `business.daily_refund_cap_vnd` đang là 500.000đ, cao hơn ngân sách Finance của thẻ S4. Đề nghị Ly chốt lại cap 300.000đ và chạy lại; đề nghị này chưa phải thay đổi cấu hình đã được kiểm chứng. Chỉ tăng người trực không thay thế giới hạn lưu lượng và cần tính lại ROI.
 
 ---
 
